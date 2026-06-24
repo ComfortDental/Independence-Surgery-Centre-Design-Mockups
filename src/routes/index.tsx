@@ -63,8 +63,93 @@ function useReveal() {
   }, []);
 }
 
+function useCountUp() {
+  useEffect(() => {
+    const animate = (el: HTMLElement) => {
+      const to = Number(el.dataset.countTo ?? "0");
+      const from = Number(el.dataset.countFrom ?? "40");
+      const duration = Number(el.dataset.countDur ?? "1800");
+      const start = performance.now();
+      const step = (now: number) => {
+        const p = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - p, 3);
+        el.textContent = String(Math.round(from - (from - to) * eased));
+        if (p < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    };
+    const els = document.querySelectorAll<HTMLElement>(".count-up");
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            animate(e.target as HTMLElement);
+            io.unobserve(e.target);
+          }
+        });
+      },
+      { threshold: 0.5 },
+    );
+    els.forEach((el) => io.observe(el));
+    return () => io.disconnect();
+  }, []);
+}
+
+function useMagnetic() {
+  useEffect(() => {
+    const els = document.querySelectorAll<HTMLElement>(".magnetic");
+    const onMove = (e: MouseEvent, btn: HTMLElement) => {
+      const r = btn.getBoundingClientRect();
+      const x = e.clientX - r.left - r.width / 2;
+      const y = e.clientY - r.top - r.height / 2;
+      btn.style.transform = `translate(${x * 0.18}px, ${y * 0.18}px)`;
+    };
+    const reset = (btn: HTMLElement) => {
+      btn.style.transition = "transform 0.45s cubic-bezier(0.22,1,0.36,1)";
+      btn.style.transform = "translate(0,0)";
+    };
+    const handlers: Array<() => void> = [];
+    els.forEach((btn) => {
+      const move = (e: MouseEvent) => {
+        btn.style.transition = "transform 0.15s ease-out";
+        onMove(e, btn);
+      };
+      const leave = () => reset(btn);
+      btn.addEventListener("mousemove", move);
+      btn.addEventListener("mouseleave", leave);
+      handlers.push(() => {
+        btn.removeEventListener("mousemove", move);
+        btn.removeEventListener("mouseleave", leave);
+      });
+    });
+    return () => handlers.forEach((fn) => fn());
+  }, []);
+}
+
+function FloatingRefer() {
+  const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    const onScroll = () => {
+      const hero = document.getElementById("top");
+      if (!hero) return;
+      const bottom = hero.getBoundingClientRect().bottom;
+      setVisible(bottom < -40);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+  return (
+    <a href="#refer" className={`floating-refer magnetic ${visible ? "visible" : ""}`}>
+      Refer a Patient <span aria-hidden>→</span>
+    </a>
+  );
+}
+
 function Index() {
   useReveal();
+  useCountUp();
+  useMagnetic();
   return (
     <div className="min-h-screen bg-background text-foreground">
       <Nav />
@@ -72,11 +157,13 @@ function Index() {
       <Story />
       <Care />
       <Doctors />
+      <HowToRefer />
       <Facility />
       <Access />
       <Values />
       <Refer />
       <Footer />
+      <FloatingRefer />
     </div>
   );
 }
@@ -295,7 +382,14 @@ function Story() {
 
           <aside className="story-sidebar">
             <div className="story-stat">
-              <div className="story-stat-num">0</div>
+              <div
+                className="story-stat-num count-up"
+                data-count-from="40"
+                data-count-to="0"
+                data-count-dur="1800"
+              >
+                40
+              </div>
               <div className="story-stat-text">
                 private oral surgeons in the area accepting Medicaid.
               </div>
@@ -745,5 +839,52 @@ function Footer() {
         </div>
       </div>
     </footer>
+  );
+}
+
+function HowToRefer() {
+  const steps = [
+    ["01", "You refer", "Submit the patient online or call. Two minutes, no fax forms, no portals to register for."],
+    ["02", "We contact", "Same day. Our team reaches the patient or family directly to coordinate scheduling and insurance."],
+    ["03", "Patient seen", "Most cases scheduled within weeks, not months — including Medicaid, special-needs, and complex sedation cases."],
+  ];
+  const accepts = ["Medicaid", "Medicare", "Most PPO", "Self-Pay"];
+  return (
+    <section id="how" className="how-refer-section">
+      <div className="how-refer-inner">
+        <div className="how-refer-header reveal">
+          <div className="story-eyebrow">How referrals work</div>
+          <h2 className="story-h2">
+            Three steps.{" "}
+            <em style={{ fontStyle: "italic", color: "#B0593A" }}>No friction.</em>
+          </h2>
+          <p className="care-sub">
+            Built for the way busy practices actually work — not for the way insurance companies wish they did.
+          </p>
+        </div>
+
+        <div className="how-refer-steps">
+          {steps.map(([n, h, b]) => (
+            <div key={n} className="how-refer-step reveal">
+              <div className="how-refer-num">{n}</div>
+              <h4>{h}</h4>
+              <p>{b}</p>
+            </div>
+          ))}
+        </div>
+
+        <div className="accepts-row reveal">
+          <span className="accepts-label">We accept</span>
+          {accepts.map((a) => (
+            <span key={a} className="accepts-pill">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M5 12l4 4L19 6" />
+              </svg>
+              {a}
+            </span>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }
