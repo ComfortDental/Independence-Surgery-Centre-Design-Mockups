@@ -125,7 +125,7 @@ function Nav() {
 function Hero() {
   return (
     <section className="relative overflow-hidden">
-      <div className="mx-auto max-w-7xl px-5 pt-10 pb-16 sm:px-8 sm:pt-14 sm:pb-24">
+      <div className="hero-grid-wrap mx-auto" style={{ maxWidth: "1440px" }}>
         <div
           className="inline-flex items-center gap-2 bg-white"
           style={{
