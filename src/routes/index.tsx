@@ -841,3 +841,50 @@ function Footer() {
     </footer>
   );
 }
+
+function HowToRefer() {
+  const steps = [
+    ["01", "You refer", "Submit the patient online or call. Two minutes, no fax forms, no portals to register for."],
+    ["02", "We contact", "Same day. Our team reaches the patient or family directly to coordinate scheduling and insurance."],
+    ["03", "Patient seen", "Most cases scheduled within weeks, not months — including Medicaid, special-needs, and complex sedation cases."],
+  ];
+  const accepts = ["Medicaid", "Medicare", "Most PPO", "Self-Pay"];
+  return (
+    <section id="how" className="how-refer-section">
+      <div className="how-refer-inner">
+        <div className="how-refer-header reveal">
+          <div className="story-eyebrow">How referrals work</div>
+          <h2 className="story-h2">
+            Three steps.{" "}
+            <em style={{ fontStyle: "italic", color: "#B0593A" }}>No friction.</em>
+          </h2>
+          <p className="care-sub">
+            Built for the way busy practices actually work — not for the way insurance companies wish they did.
+          </p>
+        </div>
+
+        <div className="how-refer-steps">
+          {steps.map(([n, h, b]) => (
+            <div key={n} className="how-refer-step reveal">
+              <div className="how-refer-num">{n}</div>
+              <h4>{h}</h4>
+              <p>{b}</p>
+            </div>
+          ))}
+        </div>
+
+        <div className="accepts-row reveal">
+          <span className="accepts-label">We accept</span>
+          {accepts.map((a) => (
+            <span key={a} className="accepts-pill">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M5 12l4 4L19 6" />
+              </svg>
+              {a}
+            </span>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
