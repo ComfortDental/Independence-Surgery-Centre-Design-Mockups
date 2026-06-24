@@ -163,22 +163,48 @@ function Hero() {
             </div>
           </div>
 
-          <div className="relative lg:pl-6">
-            <div className="float-slow relative">
-              <div className="absolute -inset-3 -z-10 rounded-[2rem] bg-[var(--cream-deep)]" aria-hidden />
-              <div className="overflow-hidden rounded-[1.75rem] bg-[var(--cream-deep)] shadow-[0_30px_60px_-30px_rgba(91,82,71,0.45)]">
-                <img
-                  src={buildingFront.url}
-                  alt="Rendering of the Independence Surgery Center building"
-                  className="aspect-[4/3] w-full object-cover"
-                />
-              </div>
-            </div>
-            <div className="float-soft absolute -left-2 bottom-10 z-10 max-w-[15rem] rounded-2xl bg-[var(--cream)] p-5 shadow-[0_20px_45px_-18px_rgba(91,82,71,0.35)] sm:-left-4 sm:bottom-14">
-              <div className="font-serif text-[1.25rem] leading-[1.15] text-[var(--terracotta)]">
+          <div className="relative lg:pl-10">
+            {/* Layer 1 — decorative peach shape, top-right */}
+            <div
+              aria-hidden
+              className="pointer-events-none absolute z-0"
+              style={{
+                top: "-18px",
+                right: "-18px",
+                width: "62%",
+                height: "74%",
+                background: "#F1E2D2",
+                borderRadius: "200px 24px 24px 24px",
+              }}
+            />
+
+            {/* Layer 2 — the photo with asymmetric huge top-left radius */}
+            <img
+              src={buildingFront.url}
+              alt="Rendering of the Independence Surgery Center building"
+              className="relative z-10 block w-full object-cover"
+              style={{
+                borderRadius: "180px 20px 20px 20px",
+                boxShadow: "0 30px 70px rgba(42,36,29,0.18)",
+                aspectRatio: "4 / 3",
+              }}
+            />
+
+            {/* Layer 3 — floating overlay card, bleeds left past the image */}
+            <div
+              className="float-slow absolute z-20 max-w-[15rem] bg-white"
+              style={{
+                bottom: "26px",
+                left: "-26px",
+                padding: "18px 24px",
+                borderRadius: "18px",
+                boxShadow: "0 16px 40px rgba(42,36,29,0.16)",
+              }}
+            >
+              <div className="font-serif text-[1.35rem] leading-[1.1] text-[var(--terracotta)]">
                 Increasing<br />access to care
               </div>
-              <div className="mt-3 text-[0.82rem] leading-snug text-[var(--ink-soft)]">
+              <div className="mt-2 text-[0.82rem] leading-snug text-[var(--ink-soft)]">
                 A focus on Medicaid<br />&amp; Medicare patients.
               </div>
             </div>
