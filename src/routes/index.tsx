@@ -78,7 +78,7 @@ function Nav() {
             <a
               key={l.href}
               href={l.href}
-              className="text-sm text-[var(--ink-soft)] transition-colors hover:text-[var(--ink)]"
+              className="nav-link text-sm text-[var(--ink-soft)] hover:text-[var(--ink)] transition-colors"
             >
               {l.label}
             </a>
@@ -87,7 +87,7 @@ function Nav() {
         <div className="flex items-center gap-3">
           <a
             href="#refer"
-            className="hidden rounded-full bg-[var(--terracotta)] px-5 py-2.5 text-sm font-medium text-[var(--cream)] shadow-[0_1px_0_rgba(0,0,0,0.06)] transition-all hover:bg-[var(--terracotta-deep)] sm:inline-flex"
+            className="btn-glow-terracotta hidden rounded-full bg-[var(--terracotta)] px-5 py-2.5 text-sm font-medium text-[var(--cream)] hover:bg-[var(--terracotta-deep)] sm:inline-flex"
           >
             Refer a Patient
           </a>
@@ -149,35 +149,38 @@ function Hero() {
             <div className="mt-8 flex flex-wrap items-center gap-3">
               <a
                 href="#refer"
-                className="inline-flex items-center gap-2 rounded-full bg-[var(--terracotta)] px-6 py-3 text-sm font-medium text-[var(--cream)] transition-all hover:bg-[var(--terracotta-deep)]"
+                className="btn-glow-terracotta inline-flex items-center gap-2 rounded-full bg-[var(--terracotta)] px-6 py-3 text-sm font-medium text-[var(--cream)] hover:bg-[var(--terracotta-deep)]"
               >
                 Refer a Patient
                 <span aria-hidden>→</span>
               </a>
               <a
                 href="#story"
-                className="inline-flex items-center gap-2 rounded-full border border-[var(--line)] bg-[var(--cream)] px-6 py-3 text-sm font-medium text-[var(--ink)] transition-colors hover:border-[var(--ink-soft)]"
+                className="btn-glow-ghost inline-flex items-center gap-2 rounded-full border border-[var(--line)] bg-[var(--cream)] px-6 py-3 text-sm font-medium text-[var(--ink)] hover:border-[var(--ink-soft)]"
               >
                 Why we built this
               </a>
             </div>
           </div>
 
-          <div className="relative">
-            <div className="absolute -left-4 top-6 z-10 hidden max-w-[14rem] rounded-2xl border border-[var(--line)] bg-[var(--cream)] p-4 shadow-[0_10px_30px_-12px_rgba(91,82,71,0.25)] sm:block">
-              <div className="text-[0.66rem] font-semibold uppercase tracking-[0.22em] text-[var(--terracotta)]">
-                Increasing access to care
-              </div>
-              <div className="mt-2 text-sm text-[var(--ink-soft)]">
-                A focus on Medicaid &amp; Medicare patients.
+          <div className="relative lg:pl-6">
+            <div className="float-slow relative">
+              <div className="absolute -inset-3 -z-10 rounded-[2rem] bg-[var(--cream-deep)]" aria-hidden />
+              <div className="overflow-hidden rounded-[1.75rem] bg-[var(--cream-deep)] shadow-[0_30px_60px_-30px_rgba(91,82,71,0.45)]">
+                <img
+                  src={buildingFront.url}
+                  alt="Rendering of the Independence Surgery Center building"
+                  className="aspect-[4/3] w-full object-cover"
+                />
               </div>
             </div>
-            <div className="overflow-hidden rounded-3xl border border-[var(--line)] bg-[var(--cream-deep)] shadow-[0_20px_60px_-30px_rgba(91,82,71,0.4)]">
-              <img
-                src={buildingFront.url}
-                alt="Rendering of the Independence Surgery Center building"
-                className="aspect-[4/3] w-full object-cover"
-              />
+            <div className="float-soft absolute -left-2 bottom-10 z-10 max-w-[15rem] rounded-2xl bg-[var(--cream)] p-5 shadow-[0_20px_45px_-18px_rgba(91,82,71,0.35)] sm:-left-4 sm:bottom-14">
+              <div className="font-serif text-[1.25rem] leading-[1.15] text-[var(--terracotta)]">
+                Increasing<br />access to care
+              </div>
+              <div className="mt-3 text-[0.82rem] leading-snug text-[var(--ink-soft)]">
+                A focus on Medicaid<br />&amp; Medicare patients.
+              </div>
             </div>
           </div>
         </div>
@@ -631,7 +634,7 @@ function Refer() {
 
             <button
               type="submit"
-              className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[var(--terracotta)] px-6 py-3.5 text-sm font-medium text-[var(--cream)] transition-all hover:bg-[var(--terracotta-deep)]"
+              className="btn-glow-terracotta mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[var(--terracotta)] px-6 py-3.5 text-sm font-medium text-[var(--cream)] hover:bg-[var(--terracotta-deep)]"
             >
               Send referral
               <span aria-hidden>→</span>
