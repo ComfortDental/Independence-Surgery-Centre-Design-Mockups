@@ -634,7 +634,7 @@ function Refer() {
 
             <button
               type="submit"
-              className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[var(--terracotta)] px-6 py-3.5 text-sm font-medium text-[var(--cream)] transition-all hover:bg-[var(--terracotta-deep)]"
+              className="btn-glow-terracotta mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[var(--terracotta)] px-6 py-3.5 text-sm font-medium text-[var(--cream)] hover:bg-[var(--terracotta-deep)]"
             >
               Send referral
               <span aria-hidden>→</span>
