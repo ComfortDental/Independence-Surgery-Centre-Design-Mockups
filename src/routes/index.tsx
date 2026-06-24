@@ -1,7 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
-import buildingFront from "@/assets/building-front.png.asset.json";
-import buildingBack from "@/assets/building-back.png.asset.json";
-import buildingSide from "@/assets/building-side.png.asset.json";
+import buildingFront from "@/assets/building-front-v2.png.asset.json";
+import buildingEntry from "@/assets/building-entry.png.asset.json";
+import buildingSide from "@/assets/building-side-v2.png.asset.json";
+import buildingSignage from "@/assets/building-signage.png.asset.json";
+import iscLogo from "@/assets/isc-logo.png.asset.json";
+import iscLogoWhite from "@/assets/isc-logo-white.png.asset.json";
 import logoOral from "@/assets/logo-oral.png.asset.json";
 import logoPedi from "@/assets/logo-pedi.png.asset.json";
 import { useState } from "react";
@@ -55,18 +58,11 @@ function Index() {
   );
 }
 
-function Wordmark({ className = "" }: { className?: string }) {
+function Wordmark({ className = "", variant = "dark" }: { className?: string; variant?: "dark" | "light" }) {
+  const src = variant === "light" ? iscLogoWhite.url : iscLogo.url;
   return (
-    <a href="#top" className={`group flex items-center gap-3 ${className}`}>
-      <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-[var(--terracotta)] text-[var(--cream)]">
-        <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round">
-          <path d="M12 4v16M4 12h16" />
-        </svg>
-      </span>
-      <span className="flex flex-col leading-none">
-        <span className="font-serif text-[1.05rem] tracking-tight text-[var(--ink)]">Independence</span>
-        <span className="text-[0.62rem] font-semibold uppercase tracking-[0.28em] text-[var(--ink-soft)]">Surgery Center</span>
-      </span>
+    <a href="#top" className={`group inline-flex items-center ${className}`}>
+      <img src={src} alt="Independence Surgery Center" className="h-10 w-auto sm:h-11" />
     </a>
   );
 }
@@ -418,14 +414,14 @@ function Facility() {
 
         <div className="mt-12 overflow-hidden rounded-3xl border border-[var(--line)] bg-[var(--cream)] shadow-[0_30px_80px_-40px_rgba(91,82,71,0.45)]">
           <img
-            src={buildingFront.url}
-            alt="Exterior view of the Independence Surgery Center"
+            src={buildingEntry.url}
+            alt="Building entry — Independence Surgery Center"
             className="aspect-[16/9] w-full object-cover"
           />
         </div>
 
         <div className="mt-4 grid gap-4 sm:grid-cols-3">
-          {[buildingSide, buildingBack, buildingFront].map((img, i) => (
+          {[buildingFront, buildingSide, buildingSignage].map((img, i) => (
             <div
               key={i}
               className="overflow-hidden rounded-2xl border border-[var(--line)] bg-[var(--cream)]"
@@ -717,26 +713,26 @@ function ContactRow({
 
 function Footer() {
   return (
-    <footer className="border-t border-[var(--line)] bg-[var(--cream)]">
+    <footer className="border-t border-[var(--line)] bg-[var(--espresso)] text-[var(--cream)]">
       <div className="mx-auto max-w-7xl px-5 py-10 sm:px-8">
         <div className="grid gap-8 sm:grid-cols-[1fr_auto] sm:items-end">
           <div>
-            <Wordmark />
-            <p className="mt-4 max-w-md text-sm leading-relaxed text-[var(--ink-soft)]">
+            <Wordmark variant="light" />
+            <p className="mt-4 max-w-md text-sm leading-relaxed text-[var(--cream)]/70">
               19921 E Jackson Dr · Independence, Missouri 64057
               <br />
               816-271-0110 · [email protected]
             </p>
           </div>
-          <nav className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-[var(--ink-soft)]">
+          <nav className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-[var(--cream)]/70">
             {navLinks.map((l) => (
-              <a key={l.href} href={l.href} className="hover:text-[var(--ink)]">
+              <a key={l.href} href={l.href} className="hover:text-[var(--cream)]">
                 {l.label}
               </a>
             ))}
           </nav>
         </div>
-        <div className="mt-10 flex flex-col gap-2 border-t border-[var(--line)] pt-6 text-xs text-[var(--ink-soft)] sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-10 flex flex-col gap-2 border-t border-[var(--cream)]/15 pt-6 text-xs text-[var(--cream)]/60 sm:flex-row sm:items-center sm:justify-between">
           <span>© 2026 Independence Surgery Center. All rights reserved.</span>
           <span>Doctor-owned · Doctor-funded · Opening Q4 2026</span>
         </div>
