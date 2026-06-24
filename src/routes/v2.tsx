@@ -9,7 +9,7 @@ import logoOral from "@/assets/logo-oral.png.asset.json";
 import logoPedi from "@/assets/logo-pedi.png.asset.json";
 import { useEffect, useState } from "react";
 
-export const Route = createFileRoute("/")({
+export const Route = createFileRoute("/v2")({
   head: () => ({
     meta: [
       { title: "Independence Surgery Center — Opening Q4 2026" },
