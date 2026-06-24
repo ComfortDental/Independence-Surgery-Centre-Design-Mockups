@@ -44,22 +44,45 @@ const navLinks = [
 function useReveal() {
   useEffect(() => {
     const els = document.querySelectorAll<HTMLElement>(".reveal");
-    els.forEach((el, i) => {
-      el.style.animationDelay = `${i * 0.08}s`;
-    });
     const io = new IntersectionObserver(
       (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) {
-            e.target.classList.add("visible");
-            io.unobserve(e.target);
-          }
+        // Stagger only within the current batch (siblings entering together),
+        // capped so fast scrolls never leave anything hidden.
+        const incoming = entries.filter((e) => e.isIntersecting);
+        incoming.forEach((e, i) => {
+          const el = e.target as HTMLElement;
+          el.style.animationDelay = `${Math.min(i, 5) * 0.06}s`;
+          el.classList.add("visible");
+          io.unobserve(el);
         });
       },
-      { threshold: 0.12 },
+      { threshold: 0, rootMargin: "0px 0px -8% 0px" },
     );
-    els.forEach((el) => io.observe(el));
-    return () => io.disconnect();
+    els.forEach((el) => {
+      // If already in or above the viewport on mount, reveal immediately.
+      const r = el.getBoundingClientRect();
+      if (r.top < window.innerHeight) {
+        el.style.animationDelay = "0s";
+        el.classList.add("visible");
+      } else {
+        io.observe(el);
+      }
+    });
+    // Safety net: anything still hidden after a short delay (e.g. user scrolled
+    // past before the observer fired) gets revealed without animation skip.
+    const failsafe = window.setTimeout(() => {
+      document.querySelectorAll<HTMLElement>(".reveal:not(.visible)").forEach((el) => {
+        const r = el.getBoundingClientRect();
+        if (r.top < window.innerHeight) {
+          el.classList.add("visible");
+          io.unobserve(el);
+          }
+      });
+    }, 400);
+    return () => {
+      window.clearTimeout(failsafe);
+      io.disconnect();
+    };
   }, []);
 }
 
