@@ -169,17 +169,12 @@
   color: var(--terracotta);
 }
 
-@keyframes float-slow {
+@keyframes isc-float {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-12px); }
-}
-@keyframes float-soft {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  50% { transform: translateY(-8px) rotate(-0.4deg); }
+  50% { transform: translateY(-10px); }
 }
 
-@utility float-slow { animation: float-slow 7s ease-in-out infinite; }
-@utility float-soft { animation: float-soft 5.5s ease-in-out infinite; animation-delay: -2s; }
+@utility float-slow { animation: isc-float 6s ease-in-out infinite; }
 
 @utility nav-link {
   position: relative;
