@@ -58,18 +58,11 @@ function Index() {
   );
 }
 
-function Wordmark({ className = "" }: { className?: string }) {
+function Wordmark({ className = "", variant = "dark" }: { className?: string; variant?: "dark" | "light" }) {
+  const src = variant === "light" ? iscLogoWhite.url : iscLogo.url;
   return (
-    <a href="#top" className={`group flex items-center gap-3 ${className}`}>
-      <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-[var(--terracotta)] text-[var(--cream)]">
-        <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round">
-          <path d="M12 4v16M4 12h16" />
-        </svg>
-      </span>
-      <span className="flex flex-col leading-none">
-        <span className="font-serif text-[1.05rem] tracking-tight text-[var(--ink)]">Independence</span>
-        <span className="text-[0.62rem] font-semibold uppercase tracking-[0.28em] text-[var(--ink-soft)]">Surgery Center</span>
-      </span>
+    <a href="#top" className={`group inline-flex items-center ${className}`}>
+      <img src={src} alt="Independence Surgery Center" className="h-10 w-auto sm:h-11" />
     </a>
   );
 }
@@ -421,14 +414,14 @@ function Facility() {
 
         <div className="mt-12 overflow-hidden rounded-3xl border border-[var(--line)] bg-[var(--cream)] shadow-[0_30px_80px_-40px_rgba(91,82,71,0.45)]">
           <img
-            src={buildingFront.url}
-            alt="Exterior view of the Independence Surgery Center"
+            src={buildingEntry.url}
+            alt="Building entry — Independence Surgery Center"
             className="aspect-[16/9] w-full object-cover"
           />
         </div>
 
         <div className="mt-4 grid gap-4 sm:grid-cols-3">
-          {[buildingSide, buildingBack, buildingFront].map((img, i) => (
+          {[buildingFront, buildingSide, buildingSignage].map((img, i) => (
             <div
               key={i}
               className="overflow-hidden rounded-2xl border border-[var(--line)] bg-[var(--cream)]"
