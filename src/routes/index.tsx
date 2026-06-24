@@ -70,37 +70,28 @@ function Wordmark({ className = "", variant = "dark" }: { className?: string; va
 function Nav() {
   const [open, setOpen] = useState(false);
   return (
-    <header id="top" className="sticky top-0 z-40 border-b border-[var(--line)]/60 bg-[var(--cream)]/85 backdrop-blur-md">
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 sm:px-8">
-        <Wordmark />
-        <nav className="hidden items-center gap-8 lg:flex">
+    <header id="top" className="isc-nav">
+      <Wordmark />
+      <div className="isc-nav-right">
+        <nav className="isc-nav-links hidden lg:flex">
           {navLinks.slice(0, -1).map((l) => (
-            <a
-              key={l.href}
-              href={l.href}
-              className="nav-link text-sm text-[var(--ink-soft)] hover:text-[var(--ink)] transition-colors"
-            >
+            <a key={l.href} href={l.href} className="nav-link">
               {l.label}
             </a>
           ))}
         </nav>
-        <div className="flex items-center gap-3">
-          <a
-            href="#refer"
-            className="btn-glow-terracotta hidden rounded-full bg-[var(--terracotta)] px-5 py-2.5 text-sm font-medium text-[var(--cream)] hover:bg-[var(--terracotta-deep)] sm:inline-flex"
-          >
-            Refer a Patient
-          </a>
-          <button
-            onClick={() => setOpen((o) => !o)}
-            className="grid h-10 w-10 place-items-center rounded-full border border-[var(--line)] lg:hidden"
-            aria-label="Toggle menu"
-          >
-            <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2">
-              {open ? <path d="M6 6l12 12M18 6l-12 12" /> : <path d="M4 7h16M4 12h16M4 17h16" />}
-            </svg>
-          </button>
-        </div>
+        <a href="#refer" className="isc-nav-cta hidden sm:inline-flex">
+          Refer a Patient <span aria-hidden>→</span>
+        </a>
+        <button
+          onClick={() => setOpen((o) => !o)}
+          className="grid h-10 w-10 place-items-center rounded-full border border-[var(--line)] lg:hidden"
+          aria-label="Toggle menu"
+        >
+          <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2">
+            {open ? <path d="M6 6l12 12M18 6l-12 12" /> : <path d="M4 7h16M4 12h16M4 17h16" />}
+          </svg>
+        </button>
       </div>
       {open && (
         <div className="border-t border-[var(--line)] bg-[var(--cream)] lg:hidden">
