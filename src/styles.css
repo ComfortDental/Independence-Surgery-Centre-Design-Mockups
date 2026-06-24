@@ -671,27 +671,36 @@
 }
 
 .building-gallery {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 14px;
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  cursor: grab;
+  scrollbar-width: none;
   margin-bottom: 42px;
+  padding-bottom: 6px;
+  -webkit-overflow-scrolling: touch;
 }
+.building-gallery::-webkit-scrollbar { display: none; }
+.building-gallery:active { cursor: grabbing; }
 .building-gallery-wrap {
+  scroll-snap-align: start;
+  flex: 0 0 auto;
+  width: min(480px, 78vw);
   overflow: hidden;
-  border-radius: 16px;
+  border-radius: 20px;
   border: 1px solid #E7DCC9;
   transition: border-color 0.25s ease;
 }
 .building-gallery-img {
   display: block;
   width: 100%;
-  height: 100%;
+  height: 320px;
   object-fit: cover;
-  aspect-ratio: 4 / 3;
-  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .building-gallery-wrap:hover { border-color: #C8A882; }
-.building-gallery-wrap:hover .building-gallery-img { transform: scale(1.03); }
+.building-gallery-wrap:hover .building-gallery-img { transform: scale(1.04); }
 
 .facility-grid {
   display: grid;
