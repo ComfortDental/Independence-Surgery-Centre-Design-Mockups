@@ -451,8 +451,8 @@ function Care() {
         <div className="care-header reveal">
           <div className="story-eyebrow">What we do</div>
           <h2 className="story-h2">
-            Two specialties.{" "}
-            <em style={{ fontStyle: "italic", color: "#B0593A" }}>One</em> surgical center.
+            The only place in KC{" "}
+            <em style={{ fontStyle: "italic", color: "#B0593A" }}>that does both.</em>
           </h2>
           <p className="care-sub">
             Oral surgery and pediatric dentistry operating side by side. Every case under sedation
@@ -577,8 +577,8 @@ function Facility() {
         <div className="facility-header reveal">
           <div className="story-eyebrow">The building</div>
           <h2 className="story-h2">
-            New construction.{" "}
-            <em style={{ fontStyle: "italic", color: "#B0593A" }}>Ground up.</em>
+            Built for this.{" "}
+            <em style={{ fontStyle: "italic", color: "#B0593A" }}>Not converted from something else.</em>
           </h2>
           <p className="care-sub">
             Every inch of this building was designed around surgical workflow. Multiple ORs,
@@ -630,8 +630,8 @@ function Access() {
       <div className="access-inner">
         <div className="access-eyebrow">Access to care</div>
         <h2 className="access-h2">
-          The reason this{" "}
-          <em style={{ fontStyle: "italic", color: "#D98A66" }}>building exists.</em>
+          The gap{" "}
+          <em style={{ fontStyle: "italic", color: "#D98A66" }}>nobody else would close.</em>
         </h2>
         <p className="access-sub">
           Most surgical specialists do not accept Medicaid. Most facilities are not equipped for
@@ -718,8 +718,8 @@ function Refer() {
         <div className="refer-left">
           <div className="story-eyebrow reveal">Get in touch</div>
           <h2 className="refer-h2 reveal">
-            Refer a patient, or just{" "}
-            <em style={{ fontStyle: "italic", color: "#B0593A" }}>reach out.</em>
+            Refer a{" "}
+            <em style={{ fontStyle: "italic", color: "#B0593A" }}>Patient.</em>
           </h2>
           <p className="refer-sub reveal">
             We're opening Q4 2026 and already building relationships with referring providers
