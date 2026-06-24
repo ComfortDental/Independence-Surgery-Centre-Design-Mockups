@@ -63,8 +63,93 @@ function useReveal() {
   }, []);
 }
 
+function useCountUp() {
+  useEffect(() => {
+    const animate = (el: HTMLElement) => {
+      const to = Number(el.dataset.countTo ?? "0");
+      const from = Number(el.dataset.countFrom ?? "40");
+      const duration = Number(el.dataset.countDur ?? "1800");
+      const start = performance.now();
+      const step = (now: number) => {
+        const p = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - p, 3);
+        el.textContent = String(Math.round(from - (from - to) * eased));
+        if (p < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    };
+    const els = document.querySelectorAll<HTMLElement>(".count-up");
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            animate(e.target as HTMLElement);
+            io.unobserve(e.target);
+          }
+        });
+      },
+      { threshold: 0.5 },
+    );
+    els.forEach((el) => io.observe(el));
+    return () => io.disconnect();
+  }, []);
+}
+
+function useMagnetic() {
+  useEffect(() => {
+    const els = document.querySelectorAll<HTMLElement>(".magnetic");
+    const onMove = (e: MouseEvent, btn: HTMLElement) => {
+      const r = btn.getBoundingClientRect();
+      const x = e.clientX - r.left - r.width / 2;
+      const y = e.clientY - r.top - r.height / 2;
+      btn.style.transform = `translate(${x * 0.18}px, ${y * 0.18}px)`;
+    };
+    const reset = (btn: HTMLElement) => {
+      btn.style.transition = "transform 0.45s cubic-bezier(0.22,1,0.36,1)";
+      btn.style.transform = "translate(0,0)";
+    };
+    const handlers: Array<() => void> = [];
+    els.forEach((btn) => {
+      const move = (e: MouseEvent) => {
+        btn.style.transition = "transform 0.15s ease-out";
+        onMove(e, btn);
+      };
+      const leave = () => reset(btn);
+      btn.addEventListener("mousemove", move);
+      btn.addEventListener("mouseleave", leave);
+      handlers.push(() => {
+        btn.removeEventListener("mousemove", move);
+        btn.removeEventListener("mouseleave", leave);
+      });
+    });
+    return () => handlers.forEach((fn) => fn());
+  }, []);
+}
+
+function FloatingRefer() {
+  const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    const onScroll = () => {
+      const hero = document.getElementById("top");
+      if (!hero) return;
+      const bottom = hero.getBoundingClientRect().bottom;
+      setVisible(bottom < -40);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+  return (
+    <a href="#refer" className={`floating-refer magnetic ${visible ? "visible" : ""}`}>
+      Refer a Patient <span aria-hidden>→</span>
+    </a>
+  );
+}
+
 function Index() {
   useReveal();
+  useCountUp();
+  useMagnetic();
   return (
     <div className="min-h-screen bg-background text-foreground">
       <Nav />
@@ -72,11 +157,13 @@ function Index() {
       <Story />
       <Care />
       <Doctors />
+      <HowToRefer />
       <Facility />
       <Access />
       <Values />
       <Refer />
       <Footer />
+      <FloatingRefer />
     </div>
   );
 }
