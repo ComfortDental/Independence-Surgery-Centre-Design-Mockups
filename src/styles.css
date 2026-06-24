@@ -480,11 +480,12 @@
   max-width: 660px;
   margin-bottom: 56px;
 }
+.care-header .story-h2 { margin-bottom: 18px; }
 .care-sub {
   font-size: 18px;
   line-height: 1.7;
   color: #5B5247;
-  margin-top: -34px;
+  margin: 0;
 }
 .care-grid {
   display: grid;
