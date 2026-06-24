@@ -593,84 +593,74 @@ function Values() {
 function Refer() {
   const [role, setRole] = useState<"provider" | "patient">("provider");
   return (
-    <section id="refer" className="border-t border-[var(--line)]/70 bg-[var(--cream-deep)]/40">
-      <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-28">
-        <div className="grid gap-12 lg:grid-cols-[1fr_1.1fr] lg:gap-16">
-          <div>
-            <SectionLabel>Get in touch</SectionLabel>
-            <h2 className="mt-4 font-serif text-4xl leading-[1.05] tracking-[-0.02em] text-[var(--ink)] sm:text-5xl md:text-6xl">
-              Refer a patient, or just{" "}
-              <em className="italic text-[var(--terracotta)]">reach out.</em>
-            </h2>
-            <p className="mt-6 max-w-md text-[1.02rem] leading-relaxed text-[var(--ink-soft)]">
-              We're opening Q4 2026 and already building relationships with referring providers
-              across the KC metro. Send a referral or ask us anything.
-            </p>
+    <section id="refer" className="refer-section">
+      <div className="refer-inner">
+        <div className="refer-left">
+          <div className="story-eyebrow reveal">Get in touch</div>
+          <h2 className="refer-h2 reveal">
+            Refer a patient, or just{" "}
+            <em style={{ fontStyle: "italic", color: "#B0593A" }}>reach out.</em>
+          </h2>
+          <p className="refer-sub reveal">
+            We're opening Q4 2026 and already building relationships with referring providers
+            across the KC metro. Send a referral or ask us anything.
+          </p>
 
-            <dl className="mt-10 space-y-5">
-              <ContactRow icon="phone" label="Call" value="816-271-0110" href="tel:8162710110" />
-              <ContactRow
-                icon="mail"
-                label="Email"
-                value="[email protected]"
-                href="mailto:[email protected]"
-              />
-              <ContactRow
-                icon="pin"
-                label="Visit"
-                value="19921 E Jackson Dr, Independence, MO 64057"
-              />
-            </dl>
+          <div className="refer-rows">
+            <ContactRow icon="phone" label="Call" value="816-271-0110" href="tel:8162710110" />
+            <ContactRow
+              icon="mail"
+              label="Email"
+              value="[email protected]"
+              href="mailto:[email protected]"
+            />
+            <ContactRow
+              icon="pin"
+              label="Visit"
+              value="19921 E Jackson Dr, Independence, MO 64057"
+            />
+          </div>
+        </div>
+
+        <form
+          onSubmit={(e) => e.preventDefault()}
+          className="form-card reveal"
+        >
+          <div className="form-tabs">
+            {(["provider", "patient"] as const).map((r) => (
+              <button
+                key={r}
+                type="button"
+                onClick={() => setRole(r)}
+                className={`form-tab ${role === r ? "is-active" : ""}`}
+              >
+                {r === "provider" ? "I'm a Provider" : "Patient / Family"}
+              </button>
+            ))}
           </div>
 
-          <form
-            onSubmit={(e) => e.preventDefault()}
-            className="rounded-3xl border border-[var(--line)] bg-[var(--cream)] p-6 shadow-[0_30px_80px_-40px_rgba(91,82,71,0.4)] sm:p-8"
-          >
-            <div className="flex gap-2 rounded-full bg-[var(--cream-deep)] p-1">
-              {(["provider", "patient"] as const).map((r) => (
-                <button
-                  key={r}
-                  type="button"
-                  onClick={() => setRole(r)}
-                  className={`flex-1 rounded-full px-4 py-2 text-sm font-medium transition-colors ${
-                    role === r
-                      ? "bg-[var(--terracotta)] text-[var(--cream)]"
-                      : "text-[var(--ink-soft)] hover:text-[var(--ink)]"
-                  }`}
-                >
-                  {r === "provider" ? "I'm a Provider" : "Patient / Family"}
-                </button>
-              ))}
+          <div className="form-fields">
+            <Field label="Your name" />
+            <Field
+              label={role === "provider" ? "Practice / organization" : "Patient name"}
+            />
+            <div className="form-row">
+              <Field label="Email" type="email" />
+              <Field label="Phone" type="tel" />
             </div>
+            <Field
+              label={role === "provider" ? "Tell us about the patient or your question" : "How can we help?"}
+              textarea
+            />
+          </div>
 
-            <div className="mt-6 grid gap-4">
-              <Field label="Your name" />
-              <Field
-                label={role === "provider" ? "Practice / organization" : "Patient name"}
-              />
-              <div className="grid gap-4 sm:grid-cols-2">
-                <Field label="Email" type="email" />
-                <Field label="Phone" type="tel" />
-              </div>
-              <Field
-                label={role === "provider" ? "Tell us about the patient or your question" : "How can we help?"}
-                textarea
-              />
-            </div>
-
-            <button
-              type="submit"
-              className="btn-glow-terracotta mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[var(--terracotta)] px-6 py-3.5 text-sm font-medium text-[var(--cream)] hover:bg-[var(--terracotta-deep)]"
-            >
-              Send referral
-              <span aria-hidden>→</span>
-            </button>
-            <p className="mt-3 text-center text-xs text-[var(--ink-soft)]">
-              Secure intake. We respond within one business day.
-            </p>
-          </form>
-        </div>
+          <button type="submit" className="form-submit">
+            Send referral <span aria-hidden>→</span>
+          </button>
+          <p className="form-disclaimer">
+            Secure intake. We respond within one business day.
+          </p>
+        </form>
       </div>
     </section>
   );
@@ -685,17 +675,13 @@ function Field({
   type?: string;
   textarea?: boolean;
 }) {
-  const base =
-    "w-full rounded-xl border border-[var(--line)] bg-[var(--cream)] px-4 py-3 text-sm text-[var(--ink)] placeholder:text-[var(--ink-soft)]/60 outline-none transition-colors focus:border-[var(--terracotta)] focus:ring-2 focus:ring-[var(--terracotta)]/15";
   return (
-    <label className="block">
-      <span className="mb-1.5 block text-xs font-semibold uppercase tracking-[0.18em] text-[var(--ink-soft)]">
-        {label}
-      </span>
+    <label className="form-label">
+      <span className="form-label-text">{label}</span>
       {textarea ? (
-        <textarea rows={4} className={base} />
+        <textarea rows={4} className="form-input form-textarea" />
       ) : (
-        <input type={type} className={base} />
+        <input type={type} className="form-input" />
       )}
     </label>
   );
@@ -718,53 +704,44 @@ function ContactRow({
     pin: <path d="M12 22s7-7.5 7-13a7 7 0 10-14 0c0 5.5 7 13 7 13zM12 11a2 2 0 100-4 2 2 0 000 4z" />,
   };
   const content = (
-    <div className="grid grid-cols-[auto_1fr] items-center gap-4">
-      <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-[var(--line)] bg-[var(--cream)] text-[var(--terracotta)]">
-        <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+    <div className="contact-row">
+      <span className="contact-icon">
+        <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
           {paths[icon]}
         </svg>
       </span>
-      <div className="min-w-0">
-        <div className="text-[0.66rem] font-semibold uppercase tracking-[0.28em] text-[var(--ink-soft)]">
-          {label}
-        </div>
-        <div className="truncate font-serif text-lg text-[var(--ink)]">{value}</div>
+      <div className="contact-stack">
+        <div className="contact-label">{label}</div>
+        <div className="contact-value">{value}</div>
       </div>
     </div>
   );
   return href ? (
-    <a href={href} className="block transition-opacity hover:opacity-80">
+    <a href={href} className="contact-link reveal">
       {content}
     </a>
   ) : (
-    <div>{content}</div>
+    <div className="contact-link reveal">{content}</div>
   );
 }
 
 function Footer() {
   return (
-    <footer className="border-t border-[var(--line)] bg-[var(--espresso)] text-[var(--cream)]">
-      <div className="mx-auto max-w-7xl px-5 py-10 sm:px-8">
-        <div className="grid gap-8 sm:grid-cols-[1fr_auto] sm:items-end">
-          <div>
-            <Wordmark variant="light" />
-            <p className="mt-4 max-w-md text-sm leading-relaxed text-[var(--cream)]/70">
-              19921 E Jackson Dr · Independence, Missouri 64057
-              <br />
-              816-271-0110 · [email protected]
-            </p>
-          </div>
-          <nav className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-[var(--cream)]/70">
-            {navLinks.map((l) => (
-              <a key={l.href} href={l.href} className="hover:text-[var(--cream)]">
-                {l.label}
-              </a>
-            ))}
-          </nav>
+    <footer className="isc-footer">
+      <div className="isc-footer-inner">
+        <div className="isc-footer-left">
+          <img src={iscLogoWhite.url} alt="Independence Surgery Center" className="isc-footer-logo" />
+          <p className="isc-footer-addr">
+            19921 E Jackson Dr · Independence, Missouri 64057
+          </p>
         </div>
-        <div className="mt-10 flex flex-col gap-2 border-t border-[var(--cream)]/15 pt-6 text-xs text-[var(--cream)]/60 sm:flex-row sm:items-center sm:justify-between">
-          <span>© 2026 Independence Surgery Center. All rights reserved.</span>
-          <span>Doctor-owned · Doctor-funded · Opening Q4 2026</span>
+        <div className="isc-footer-right">
+          <div>
+            <a href="tel:8162710110">816-271-0110</a> · <a href="mailto:[email protected]">[email protected]</a>
+          </div>
+          <div className="isc-footer-copy">
+            © 2026 Independence Surgery Center · Doctor-owned · Opening Q4 2026
+          </div>
         </div>
       </div>
     </footer>
