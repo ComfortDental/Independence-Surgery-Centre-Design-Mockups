@@ -7,7 +7,7 @@ import iscLogo from "@/assets/isc-logo.png.asset.json";
 import iscLogoWhite from "@/assets/isc-logo-white.png.asset.json";
 import logoOral from "@/assets/logo-oral.png.asset.json";
 import logoPedi from "@/assets/logo-pedi.png.asset.json";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -41,7 +41,30 @@ const navLinks = [
   { label: "Refer a Patient", href: "#refer" },
 ];
 
+function useReveal() {
+  useEffect(() => {
+    const els = document.querySelectorAll<HTMLElement>(".reveal");
+    els.forEach((el, i) => {
+      el.style.animationDelay = `${i * 0.08}s`;
+    });
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add("visible");
+            io.unobserve(e.target);
+          }
+        });
+      },
+      { threshold: 0.12 },
+    );
+    els.forEach((el) => io.observe(el));
+    return () => io.disconnect();
+  }, []);
+}
+
 function Index() {
+  useReveal();
   return (
     <div className="min-h-screen bg-background text-foreground">
       <Nav />
@@ -303,51 +326,46 @@ function Story() {
 
 function Care() {
   return (
-    <section id="care" className="border-t border-[var(--line)]/70 bg-[var(--cream-deep)]/50">
-      <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-28">
-        <SectionLabel>What we do</SectionLabel>
-        <h2 className="mt-4 max-w-3xl font-serif text-4xl tracking-[-0.02em] text-[var(--ink)] sm:text-5xl md:text-6xl">
-          Two specialties.
-          <br />
-          <em className="italic text-[var(--terracotta)]">One</em> surgical center.
-        </h2>
-        <p className="mt-6 max-w-2xl text-[1.02rem] leading-relaxed text-[var(--ink-soft)]">
-          Oral surgery and pediatric dentistry operating side by side. Every case under sedation
-          and anesthesia, in a facility built specifically for it.
-        </p>
+    <section id="care" className="care-section">
+      <div className="care-inner">
+        <div className="care-header reveal">
+          <div className="story-eyebrow">What we do</div>
+          <h2 className="story-h2">
+            Two specialties.{" "}
+            <em style={{ fontStyle: "italic", color: "#B0593A" }}>One</em> surgical center.
+          </h2>
+          <p className="care-sub">
+            Oral surgery and pediatric dentistry operating side by side. Every case under sedation
+            and anesthesia, in a facility built specifically for it.
+          </p>
+        </div>
 
-        <div className="mt-12 grid gap-5 md:grid-cols-2">
-          <article className="group flex flex-col rounded-3xl border border-[var(--line)] bg-[var(--cream)] p-7 transition-shadow hover:shadow-[0_20px_50px_-30px_rgba(91,82,71,0.4)]">
-            <div className="flex h-20 items-center">
-              <img src={logoOral.url} alt="Independence Oral Surgery" className="max-h-16 w-auto" />
-            </div>
-            <p className="mt-6 text-[0.98rem] leading-relaxed text-[var(--ink-soft)]">
-              Full-scope oral and maxillofacial surgery led by a dual-degree MD/DMD board certified
-              by ABOMS. When you refer here, your patient is treated by the owner of the facility.
-              Not a resident. Not a rotation.{" "}
-              <span className="text-[var(--ink)]">The same surgeon, every time.</span>
+        <div className="care-grid">
+          <article className="care-card reveal">
+            <img src={logoOral.url} alt="Independence Oral Surgery" className="care-logo" />
+            <p className="care-body">
+              Full-scope oral and maxillofacial surgery led by a dual-degree MD/DMD board
+              certified by ABOMS. When you refer here, your patient is treated by the owner of
+              the facility. Not a resident. Not a rotation.{" "}
+              <span style={{ color: "#2A241D" }}>The same surgeon, every time.</span>
             </p>
           </article>
 
-          <article className="group flex flex-col rounded-3xl border border-[var(--line)] bg-[var(--cream)] p-7 transition-shadow hover:shadow-[0_20px_50px_-30px_rgba(91,82,71,0.4)]">
-            <div className="flex h-20 items-center">
-              <img src={logoPedi.url} alt="Independence Pediatric Dentistry" className="max-h-16 w-auto" />
-            </div>
-            <p className="mt-6 text-[0.98rem] leading-relaxed text-[var(--ink-soft)]">
+          <article className="care-card reveal">
+            <img src={logoPedi.url} alt="Independence Pediatric Dentistry" className="care-logo" />
+            <p className="care-body">
               Some kids can't sit in a dental chair. Special needs, developmental disabilities,
               severe anxiety, complex treatment plans. They need an operating room, a pediatric
               dentist who has done this hundreds of times, and a facility designed around them.{" "}
-              <span className="text-[var(--ink)]">That is what this is.</span>
+              <span style={{ color: "#2A241D" }}>That is what this is.</span>
             </p>
           </article>
         </div>
 
-        <div className="mt-6 rounded-3xl bg-[var(--espresso)] p-7 text-center text-[var(--cream)]/90 sm:p-8">
-          <p className="font-serif text-xl tracking-tight sm:text-2xl">
-            Two specialties. One building.{" "}
-            <em className="italic text-[var(--cream)]">Designed from scratch</em> to handle volume
-            and do it safely.
-          </p>
+        <div className="care-banner reveal">
+          Two specialties. One building.{" "}
+          <em style={{ fontStyle: "italic" }}>Designed from scratch</em> to handle volume and do
+          it safely.
         </div>
       </div>
     </section>
@@ -356,38 +374,42 @@ function Care() {
 
 function Doctors() {
   return (
-    <section id="doctors" className="border-t border-[var(--line)]/70">
-      <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-28">
-        <SectionLabel>Our clinicians</SectionLabel>
-        <h2 className="mt-4 max-w-3xl font-serif text-4xl tracking-[-0.02em] text-[var(--ink)] sm:text-5xl md:text-6xl">
-          The doctors who built it{" "}
-          <em className="italic text-[var(--terracotta)]">work in it.</em>
-        </h2>
-        <p className="mt-6 max-w-2xl text-[1.02rem] leading-relaxed text-[var(--ink-soft)]">
-          These aren't hired guns. They funded the building, designed the workflow, and operate in
-          it every day. When you refer a patient here, you know exactly who is treating them.
-        </p>
+    <section id="doctors" className="doctors-section">
+      <div className="care-inner">
+        <div className="care-header reveal">
+          <div className="story-eyebrow">Our clinicians</div>
+          <h2 className="story-h2">
+            The doctors who built it{" "}
+            <em style={{ fontStyle: "italic", color: "#B0593A" }}>work in it.</em>
+          </h2>
+          <p className="care-sub">
+            These aren't hired guns. They funded the building, designed the workflow, and operate
+            in it every day. When you refer a patient here, you know exactly who is treating them.
+          </p>
+        </div>
 
-        <div className="mt-12 grid gap-5 md:grid-cols-2">
+        <div className="care-grid">
           <DoctorCard
             specialty="Oral & Maxillofacial Surgery"
             tag="Board-Certified Specialist"
+            tagColor="#B0593A"
             body="MD and DMD. Fellowship trained. Board certified by the American Board of Oral and Maxillofacial Surgery. That is the ceiling of the specialty, and he is at it. He could practice anywhere. He chose to build something."
             credentials={["MD + DMD", "Board Certified ABOMS", "Owner-Operator"]}
           />
           <DoctorCard
             specialty="Pediatric Dentistry"
             tag="Board-Certified Specialist"
+            tagColor="#5E6E4D"
             body="Board certified. Advanced residency in hospital-based pediatric dentistry and special needs care. The cases other offices can't handle are the ones she built her career around. She is not here by default. She helped design this place."
             credentials={["Board Certified Pediatric Dentist", "Owner-Operator"]}
           />
         </div>
 
-        <figure className="mt-10 grid gap-6 rounded-3xl border border-[var(--terracotta)]/30 bg-[var(--terracotta)]/[0.07] p-8 sm:grid-cols-[1.2fr_1fr] sm:p-10">
-          <blockquote className="font-serif text-2xl leading-[1.2] tracking-tight text-[var(--ink)] sm:text-3xl">
+        <figure className="doctors-banner reveal">
+          <blockquote className="doctors-banner-quote">
             "No private equity. No hospital system. No outside investors."
           </blockquote>
-          <figcaption className="text-sm leading-relaxed text-[var(--ink-soft)] sm:border-l sm:border-[var(--terracotta)]/30 sm:pl-8">
+          <figcaption className="doctors-banner-text">
             The doctors who operate here are the same ones who funded the building. That is a
             different kind of accountability, and you will feel it.
           </figcaption>
@@ -400,29 +422,26 @@ function Doctors() {
 function DoctorCard({
   specialty,
   tag,
+  tagColor,
   body,
   credentials,
 }: {
   specialty: string;
   tag: string;
+  tagColor: string;
   body: string;
   credentials: string[];
 }) {
   return (
-    <article className="flex flex-col rounded-3xl border border-[var(--line)] bg-[var(--cream)] p-7">
-      <div className="text-[0.66rem] font-semibold uppercase tracking-[0.28em] text-[var(--terracotta)]">
+    <article className="doctor-card reveal">
+      <h3 className="doctor-h3">{specialty}</h3>
+      <div className="doctor-credential" style={{ color: tagColor }}>
         {tag}
       </div>
-      <h3 className="mt-3 font-serif text-2xl tracking-tight text-[var(--ink)] sm:text-[1.7rem]">
-        {specialty}
-      </h3>
-      <p className="mt-4 text-[0.98rem] leading-relaxed text-[var(--ink-soft)]">{body}</p>
-      <div className="mt-6 flex flex-wrap gap-2">
+      <p className="doctor-body">{body}</p>
+      <div className="doctor-pills">
         {credentials.map((c) => (
-          <span
-            key={c}
-            className="rounded-full border border-[var(--line)] bg-[var(--cream-deep)]/50 px-3 py-1 text-xs font-medium text-[var(--ink-soft)]"
-          >
+          <span key={c} className="doctor-pill">
             {c}
           </span>
         ))}
