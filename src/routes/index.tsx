@@ -125,7 +125,7 @@ function Nav() {
 function Hero() {
   return (
     <section className="relative overflow-hidden">
-      <div className="mx-auto max-w-7xl px-5 pt-10 pb-16 sm:px-8 sm:pt-14 sm:pb-24">
+      <div className="hero-grid-wrap mx-auto" style={{ maxWidth: "1440px" }}>
         <div
           className="inline-flex items-center gap-2 bg-white"
           style={{
@@ -151,39 +151,39 @@ function Hero() {
           Opening Q4 2026 · Independence, MO
         </div>
 
-        <div className="mt-8 grid gap-10 lg:grid-cols-[1.1fr_1fr] lg:items-end lg:gap-16">
-          <div>
-            <h1 className="font-serif text-[2.6rem] leading-[1.02] tracking-[-0.02em] text-[var(--ink)] sm:text-6xl md:text-7xl lg:text-[5.4rem]">
+        <div className="hero-grid mt-8">
+          <div className="hero-copy">
+            <h1 className="hero-h1 font-serif text-[var(--ink)]">
               The surgery center
               <br />
               that{" "}
-              <em className="italic text-[var(--terracotta)]">
+              <em style={{ fontStyle: "italic", color: "#B0593A" }}>
                 should already
                 <br className="hidden sm:block" /> exist.
               </em>
             </h1>
-            <p className="mt-7 max-w-md text-[1.02rem] leading-relaxed text-[var(--ink-soft)]">
+            <p className="hero-sub">
               A brand-new ambulatory surgery center. Doctor-owned. Doctor-funded. Built so
               Medicaid, Medicare, and special-needs patients finally have somewhere to go.
             </p>
-            <div className="mt-8 flex flex-wrap items-center gap-3">
+            <div className="hero-cta">
               <a
                 href="#refer"
-                className="btn-glow-terracotta inline-flex items-center gap-2 rounded-full bg-[var(--terracotta)] px-6 py-3 text-sm font-medium text-[var(--cream)] hover:bg-[var(--terracotta-deep)]"
+                className="hero-btn-primary"
               >
                 Refer a Patient
                 <span aria-hidden>→</span>
               </a>
               <a
                 href="#story"
-                className="btn-glow-ghost inline-flex items-center gap-2 rounded-full border border-[var(--line)] bg-[var(--cream)] px-6 py-3 text-sm font-medium text-[var(--ink)] hover:border-[var(--ink-soft)]"
+                className="hero-btn-ghost"
               >
                 Why we built this
               </a>
             </div>
           </div>
 
-          <div className="relative lg:pl-10">
+          <div className="hero-image relative">
             {/* Layer 1 — decorative peach shape, top-right */}
             <div
               aria-hidden
