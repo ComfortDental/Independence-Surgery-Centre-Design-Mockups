@@ -382,7 +382,14 @@ function Story() {
 
           <aside className="story-sidebar">
             <div className="story-stat">
-              <div className="story-stat-num">0</div>
+              <div
+                className="story-stat-num count-up"
+                data-count-from="40"
+                data-count-to="0"
+                data-count-dur="1800"
+              >
+                40
+              </div>
               <div className="story-stat-text">
                 private oral surgeons in the area accepting Medicaid.
               </div>
