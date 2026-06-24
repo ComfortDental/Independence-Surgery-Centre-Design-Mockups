@@ -1,7 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
-import buildingFront from "@/assets/building-front.png.asset.json";
-import buildingBack from "@/assets/building-back.png.asset.json";
-import buildingSide from "@/assets/building-side.png.asset.json";
+import buildingFront from "@/assets/building-front-v2.png.asset.json";
+import buildingEntry from "@/assets/building-entry.png.asset.json";
+import buildingSide from "@/assets/building-side-v2.png.asset.json";
+import buildingSignage from "@/assets/building-signage.png.asset.json";
+import iscLogo from "@/assets/isc-logo.png.asset.json";
+import iscLogoWhite from "@/assets/isc-logo-white.png.asset.json";
 import logoOral from "@/assets/logo-oral.png.asset.json";
 import logoPedi from "@/assets/logo-pedi.png.asset.json";
 import { useState } from "react";
