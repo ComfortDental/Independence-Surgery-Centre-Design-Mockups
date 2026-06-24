@@ -1308,7 +1308,7 @@
 .v2-spine-fill {
   position: absolute; top: 0; left: 0;
   width: 1px; background: #B0593A;
-  height: 0; transition: height .1s linear;
+  height: 0;
 }
 @media (max-width: 900px) { .v2-spine { display: none; } }
 

@@ -988,30 +988,46 @@ function Spine() {
     const spine = document.querySelector<HTMLElement>(".v2-spine");
     if (!fill || !spine) return;
     let raf = 0;
+    let startY = 0;
+    let endY = 0;
+    const measure = () => {
+      const nav = document.getElementById("top");
+      const footer = document.querySelector<HTMLElement>(".isc-footer");
+      startY = nav ? nav.getBoundingClientRect().bottom + window.scrollY : 0;
+      endY = footer
+        ? footer.getBoundingClientRect().top + window.scrollY
+        : document.body.scrollHeight;
+      spine.style.top = `${startY}px`;
+      spine.style.height = `${Math.max(endY - startY, 0)}px`;
+      update();
+    };
+    const update = () => {
+      const viewport = window.scrollY + window.innerHeight * 0.5;
+      const span = Math.max(endY - startY, 1);
+      const p = (viewport - startY) / span;
+      fill.style.height = `${Math.min(Math.max(p, 0), 1) * 100}%`;
+    };
     const onScroll = () => {
       cancelAnimationFrame(raf);
-      raf = requestAnimationFrame(() => {
-        const nav = document.getElementById("top");
-        const footer = document.querySelector<HTMLElement>(".isc-footer");
-        const startY = nav ? nav.getBoundingClientRect().bottom + window.scrollY : 0;
-        const endY = footer
-          ? footer.getBoundingClientRect().top + window.scrollY
-          : document.body.scrollHeight;
-        // Position the spine track between header and footer
-        spine.style.top = `${startY}px`;
-        spine.style.height = `${Math.max(endY - startY, 0)}px`;
-        // Progress based on viewport center between those bounds
-        const viewport = window.scrollY + window.innerHeight * 0.5;
-        const p = (viewport - startY) / Math.max(endY - startY, 1);
-        fill.style.height = `${Math.min(Math.max(p, 0), 1) * 100}%`;
-      });
+      raf = requestAnimationFrame(update);
     };
     window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
-    onScroll();
+    window.addEventListener("resize", measure);
+    window.addEventListener("load", measure);
+    // Re-measure when layout changes (images loading, fonts, reveals, etc.)
+    const ro = new ResizeObserver(measure);
+    ro.observe(document.body);
+    measure();
+    // Settle measurement after cold-open / late images
+    const t1 = window.setTimeout(measure, 800);
+    const t2 = window.setTimeout(measure, 2400);
     return () => {
       window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
+      window.removeEventListener("resize", measure);
+      window.removeEventListener("load", measure);
+      ro.disconnect();
+      window.clearTimeout(t1);
+      window.clearTimeout(t2);
       cancelAnimationFrame(raf);
     };
   }, []);
