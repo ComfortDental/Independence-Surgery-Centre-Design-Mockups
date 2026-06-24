@@ -1300,8 +1300,8 @@
 
 /* Spine */
 .v2-spine {
-  position: fixed; left: 3vw; top: 0;
-  width: 1px; height: 100vh;
+  position: absolute; left: 3vw; top: 0;
+  width: 1px; height: 0;
   background: #E7DCC9; z-index: 40;
   pointer-events: none;
 }
