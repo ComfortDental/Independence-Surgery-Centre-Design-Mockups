@@ -232,19 +232,19 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
 
 function Story() {
   return (
-    <section id="story" className="border-t border-[var(--line)]/70">
-      <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-28">
-        <SectionLabel>Our story</SectionLabel>
-        <h2 className="mt-4 font-serif text-4xl tracking-[-0.02em] text-[var(--ink)] sm:text-5xl md:text-6xl">
-          Why this exists
-        </h2>
+    <section id="story" className="story-section">
+      <div className="story-inner">
+        <div className="story-eyebrow">Our Story</div>
+        <h2 className="story-h2">Why this exists</h2>
 
-        <div className="mt-12 grid gap-12 lg:grid-cols-[1.4fr_1fr] lg:gap-16">
-          <div className="space-y-5 text-[1.02rem] leading-[1.75] text-[var(--ink-soft)]">
-            <p>
+        <div className="story-grid">
+          <div className="story-text">
+            <p className="story-lead">
               Two years ago, a speaker at a conference put up a single number.{" "}
-              <span className="font-semibold italic text-[var(--terracotta)]">Zero.</span> Not one
-              private oral surgeon in the area accepted Medicaid. Then the talk turned to children.
+              <span style={{ color: "#B0593A", fontWeight: 600 }}>Zero.</span> Not one private oral
+              surgeon in the area accepted Medicaid. Then the talk turned to children.
+            </p>
+            <p>
               Kids with infections spreading through their jaws. Kids who needed surgery under
               general anesthesia and couldn't get into a hospital OR for up to a year.
             </p>
@@ -252,7 +252,7 @@ function Story() {
               A four-year-old who won't eat because it hurts too much and can't tell you why. A
               parent on the phone for the third time this week, hearing the same answer from every
               office in the city.{" "}
-              <em>We don't take that insurance. Try the hospital.</em> Already tried the hospital. A
+              <em className="story-quote">We don't take that insurance. Try the hospital.</em> Already tried the hospital. A
               teenager with a developmental disability, nonverbal, pulling at their own face because
               that's the only way to say something is wrong. A family leaving work again, sitting in
               another ER, watching a doctor hand over the same antibiotics and the same referral to
@@ -270,38 +270,31 @@ function Story() {
             </p>
           </div>
 
-          <div className="space-y-5">
-            <div className="rounded-3xl bg-[var(--terracotta)] p-8 text-[var(--cream)] shadow-[0_20px_50px_-30px_rgba(176,89,58,0.6)]">
-              <div className="font-serif text-[7rem] leading-none tracking-[-0.04em]">0</div>
-              <div className="mt-3 text-sm leading-relaxed text-[var(--cream)]/85">
+          <aside className="story-sidebar">
+            <div className="story-stat">
+              <div className="story-stat-num">0</div>
+              <div className="story-stat-text">
                 private oral surgeons in the area accepting Medicaid.
-              </div>
-              <div className="mt-4 border-t border-[var(--cream)]/25 pt-4 text-xs uppercase tracking-[0.22em] text-[var(--cream)]/80">
-                That number is why this building is going up.
               </div>
             </div>
 
-            <div className="rounded-2xl border border-[var(--line)] bg-[var(--cream)] p-6">
-              <div className="text-[0.66rem] font-semibold uppercase tracking-[0.28em] text-[var(--terracotta)]">
-                Mission
-              </div>
-              <p className="mt-2 text-sm leading-relaxed text-[var(--ink-soft)]">
+            <div className="story-card">
+              <div className="story-card-label" style={{ color: "#6F7E5E" }}>Mission</div>
+              <p className="story-card-body">
                 Deliver surgical care with precision, safety, and respect. Treat every patient like
                 they matter, because they do.
               </p>
             </div>
 
-            <div className="rounded-2xl border border-[var(--line)] bg-[var(--cream)] p-6">
-              <div className="text-[0.66rem] font-semibold uppercase tracking-[0.28em] text-[var(--terracotta)]">
-                Vision
-              </div>
-              <p className="mt-2 text-sm leading-relaxed text-[var(--ink-soft)]">
+            <div className="story-card">
+              <div className="story-card-label" style={{ color: "#B0593A" }}>Vision</div>
+              <p className="story-card-body">
                 Build the facility that should already exist. Real operating rooms. Real
                 specialists. Real access for Medicaid patients, Medicare patients, and patients
                 with special needs who have been waiting too long.
               </p>
             </div>
-          </div>
+          </aside>
         </div>
       </div>
     </section>
