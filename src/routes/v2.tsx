@@ -914,3 +914,181 @@ function HowToRefer() {
     </section>
   );
 }
+
+// ────────────────────────────────────────────────────────────────────────────
+// V2 ELITE LAYER
+// ────────────────────────────────────────────────────────────────────────────
+
+function ColdOpen() {
+  const [done, setDone] = useState(false);
+  const [started, setStarted] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (sessionStorage.getItem("isc-v2-cold-open") === "1") {
+      setDone(true);
+      return;
+    }
+  }, []);
+
+  const begin = () => {
+    setStarted(true);
+    // bass tone
+    try {
+      const Ctx = (window.AudioContext || (window as any).webkitAudioContext) as
+        | typeof AudioContext
+        | undefined;
+      if (Ctx) {
+        const ctx = new Ctx();
+        const o = ctx.createOscillator();
+        const g = ctx.createGain();
+        o.connect(g);
+        g.connect(ctx.destination);
+        o.frequency.value = 80;
+        o.type = "sine";
+        g.gain.setValueAtTime(0.08, ctx.currentTime);
+        g.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 2.5);
+        o.start();
+        o.stop(ctx.currentTime + 2.6);
+      }
+    } catch {
+      /* no-op */
+    }
+    // play sequence then dismiss
+    window.setTimeout(() => {
+      sessionStorage.setItem("isc-v2-cold-open", "1");
+      setDone(true);
+    }, 6800);
+  };
+
+  if (done) return null;
+
+  return (
+    <div className={`v2-cold ${started ? "is-running" : ""}`}>
+      {!started ? (
+        <button className="v2-cold-enter" onClick={begin}>
+          Enter <span aria-hidden>→</span>
+        </button>
+      ) : (
+        <div className="v2-cold-stage">
+          <div className="v2-cold-zero">Zero.</div>
+          <div className="v2-cold-line2">
+            <span>Private oral surgeons</span> <span>in Kansas City</span>{" "}
+            <span>accepting Medicaid.</span>
+          </div>
+          <div className="v2-cold-line3">
+            <span>We</span> <span>built</span> <span>a</span> <span>surgery</span>{" "}
+            <span>center.</span>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function Spine() {
+  useEffect(() => {
+    const fill = document.querySelector<HTMLElement>(".v2-spine-fill");
+    if (!fill) return;
+    let raf = 0;
+    const onScroll = () => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        const max = document.body.scrollHeight - window.innerHeight;
+        const p = max > 0 ? window.scrollY / max : 0;
+        fill.style.height = `${Math.min(Math.max(p, 0), 1) * 100}%`;
+      });
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      cancelAnimationFrame(raf);
+    };
+  }, []);
+  return (
+    <div className="v2-spine" aria-hidden>
+      <div className="v2-spine-fill" />
+    </div>
+  );
+}
+
+function PullQuote() {
+  return (
+    <section className="v2-pullquote reveal">
+      <p>
+        "A four-year-old who won't eat because it hurts too much — and can't tell you why."
+      </p>
+    </section>
+  );
+}
+
+function NumberWall() {
+  const items: [string, string][] = [
+    ["MEDICARE", "CMS-certified. Full acceptance. No asterisks."],
+    ["MEDICAID", "The gap that started everything. We take them in."],
+    ["SPECIAL NEEDS", "ORs, anesthesia, and clinicians who know what they're doing."],
+  ];
+  return (
+    <section id="access" className="v2-numberwall">
+      <div className="v2-numberwall-eyebrow">Access</div>
+      {items.map(([h, b]) => (
+        <div key={h} className="v2-numberwall-row reveal">
+          <h3>{h}</h3>
+          <p>{b}</p>
+        </div>
+      ))}
+    </section>
+  );
+}
+
+function FacilityParallax() {
+  useEffect(() => {
+    const imgs = document.querySelectorAll<HTMLImageElement>(".v2-building-img");
+    let raf = 0;
+    const onScroll = () => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        imgs.forEach((img) => {
+          const parent = img.parentElement;
+          if (!parent) return;
+          const rect = parent.getBoundingClientRect();
+          const ratio = rect.top / window.innerHeight;
+          img.style.transform = `translateY(${ratio * 12}%)`;
+        });
+      });
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      cancelAnimationFrame(raf);
+    };
+  }, []);
+
+  const moments: [string, string][] = [
+    [buildingEntry.url, "Multiple ORs. Hospital-grade. Designed around surgical workflow."],
+    [buildingFront.url, "Independence, Missouri. Central to the KC metro."],
+    [buildingSide.url, "New construction. Built for this — not converted from something else."],
+  ];
+
+  return (
+    <section id="facility" className="v2-facility">
+      <div className="v2-facility-header reveal">
+        <div className="story-eyebrow">The building</div>
+        <h2 className="story-h2">
+          Built for this.{" "}
+          <em style={{ fontStyle: "italic", color: "#B0593A" }}>
+            Not converted from something else.
+          </em>
+        </h2>
+      </div>
+      {moments.map(([src, caption]) => (
+        <div key={src} className="v2-building-moment">
+          <img src={src} alt="Independence Surgery Center" className="v2-building-img" />
+          <div className="v2-building-caption reveal">{caption}</div>
+        </div>
+      ))}
+    </section>
+  );
+}
