@@ -7,7 +7,7 @@ import iscLogo from "@/assets/isc-logo.png.asset.json";
 import iscLogoWhite from "@/assets/isc-logo-white.png.asset.json";
 import logoOral from "@/assets/logo-oral.png.asset.json";
 import logoPedi from "@/assets/logo-pedi.png.asset.json";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -42,6 +42,7 @@ const navLinks = [
 ];
 
 function Index() {
+  useReveal();
   return (
     <div className="min-h-screen bg-background text-foreground">
       <Nav />
