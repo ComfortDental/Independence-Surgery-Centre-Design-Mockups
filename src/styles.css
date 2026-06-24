@@ -53,8 +53,8 @@
   --color-ink-soft: var(--ink-soft);
   --color-espresso: var(--espresso);
   --color-line: var(--line);
-  --font-serif: "Instrument Serif", "Source Serif 4", Georgia, serif;
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Spectral", "Source Serif 4", Georgia, serif;
+  --font-sans: "Figtree", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
 }
 
