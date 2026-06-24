@@ -452,52 +452,50 @@ function DoctorCard({
 
 function Facility() {
   return (
-    <section id="facility" className="border-t border-[var(--line)]/70 bg-[var(--cream-deep)]/50">
-      <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-28">
-        <SectionLabel>The building</SectionLabel>
-        <h2 className="mt-4 max-w-3xl font-serif text-4xl tracking-[-0.02em] text-[var(--ink)] sm:text-5xl md:text-6xl">
-          New construction.{" "}
-          <em className="italic text-[var(--terracotta)]">Ground up.</em>
-        </h2>
-        <p className="mt-6 max-w-2xl text-[1.02rem] leading-relaxed text-[var(--ink-soft)]">
-          Every inch of this building was designed around surgical workflow. Multiple ORs,
-          hospital-grade infrastructure, and room to scale. Independence, Missouri.
-        </p>
+    <section id="facility" className="facility-section">
+      <div className="facility-inner">
+        <div className="facility-header reveal">
+          <div className="story-eyebrow">The building</div>
+          <h2 className="story-h2">
+            New construction.{" "}
+            <em style={{ fontStyle: "italic", color: "#B0593A" }}>Ground up.</em>
+          </h2>
+          <p className="care-sub">
+            Every inch of this building was designed around surgical workflow. Multiple ORs,
+            hospital-grade infrastructure, and room to scale. Independence, Missouri.
+          </p>
+        </div>
 
-        <div className="mt-12 overflow-hidden rounded-3xl border border-[var(--line)] bg-[var(--cream)] shadow-[0_30px_80px_-40px_rgba(91,82,71,0.45)]">
+        <div className="building-hero-wrap reveal">
           <img
             src={buildingEntry.url}
             alt="Building entry — Independence Surgery Center"
-            className="aspect-[16/9] w-full object-cover"
+            className="building-hero-img"
           />
         </div>
 
-        <div className="mt-4 grid gap-4 sm:grid-cols-3">
+        <div className="building-gallery">
           {[buildingFront, buildingSide, buildingSignage].map((img, i) => (
-            <div
-              key={i}
-              className="overflow-hidden rounded-2xl border border-[var(--line)] bg-[var(--cream)]"
-            >
+            <div key={i} className="building-gallery-wrap reveal">
               <img
                 src={img.url}
                 alt="Exterior view of the Independence Surgery Center"
-                className="aspect-[4/3] w-full object-cover"
+                className="building-gallery-img"
               />
             </div>
           ))}
         </div>
 
-        <div className="mt-10 grid gap-px overflow-hidden rounded-3xl border border-[var(--line)] bg-[var(--line)] sm:grid-cols-2 lg:grid-cols-4">
+        <div className="facility-grid">
           {[
             ["Purpose-Built Design", "Engineered from the ground up for surgical efficiency — not converted from something else."],
             ["Multiple Operating Rooms", "Simultaneous cases running in parallel. Shorter wait times. Higher throughput."],
             ["Hospital-Grade Monitoring", "Full anesthesia capability. Same monitoring, same safety standards, same equipment as a hospital OR."],
             ["Kansas City Metro", "Centrally located in Independence. Easy access from anywhere in the KC metro."],
           ].map(([h, b]) => (
-            <div key={h} className="bg-[var(--cream)] p-7">
-              <div className="h-2 w-8 rounded-full bg-[var(--terracotta)]" />
-              <h3 className="mt-4 font-serif text-xl tracking-tight text-[var(--ink)]">{h}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-[var(--ink-soft)]">{b}</p>
+            <div key={h} className="facility-card reveal">
+              <h4 className="facility-card-h">{h}</h4>
+              <p className="facility-card-body">{b}</p>
             </div>
           ))}
         </div>
@@ -508,21 +506,19 @@ function Facility() {
 
 function Access() {
   return (
-    <section id="access" className="bg-[var(--espresso)] text-[var(--cream)]">
-      <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-28">
-        <div className="text-[0.72rem] font-semibold uppercase tracking-[0.32em] text-[var(--terracotta)]">
-          Access to care
-        </div>
-        <h2 className="mt-4 max-w-3xl font-serif text-4xl leading-[1.05] tracking-[-0.02em] text-[var(--cream)] sm:text-5xl md:text-6xl">
+    <section id="access" className="access-section reveal">
+      <div className="access-inner">
+        <div className="access-eyebrow">Access to care</div>
+        <h2 className="access-h2">
           The reason this{" "}
-          <em className="italic text-[var(--terracotta)]">building exists.</em>
+          <em style={{ fontStyle: "italic", color: "#D98A66" }}>building exists.</em>
         </h2>
-        <p className="mt-6 max-w-2xl text-[1.02rem] leading-relaxed text-[var(--cream)]/75">
+        <p className="access-sub">
           Most surgical specialists do not accept Medicaid. Most facilities are not equipped for
           special-needs patients. We built one that does both.
         </p>
 
-        <div className="mt-12 grid gap-5 md:grid-cols-3">
+        <div className="access-grid">
           <AccessCard
             title="Medicare"
             body="CMS-certified ambulatory surgery center. Full Medicare acceptance. No asterisks."
@@ -552,26 +548,9 @@ function AccessCard({
   highlight?: boolean;
 }) {
   return (
-    <div
-      className={`rounded-3xl p-7 ${
-        highlight
-          ? "bg-[var(--terracotta)] text-[var(--cream)]"
-          : "border border-[var(--cream)]/12 bg-[var(--cream)]/[0.04] text-[var(--cream)]"
-      }`}
-    >
-      <div
-        className={`h-2 w-8 rounded-full ${
-          highlight ? "bg-[var(--cream)]" : "bg-[var(--terracotta)]"
-        }`}
-      />
-      <h3 className="mt-4 font-serif text-2xl tracking-tight">{title}</h3>
-      <p
-        className={`mt-3 text-sm leading-relaxed ${
-          highlight ? "text-[var(--cream)]/90" : "text-[var(--cream)]/70"
-        }`}
-      >
-        {body}
-      </p>
+    <div className={`access-card reveal ${highlight ? "access-card-featured" : ""}`}>
+      <h4 className="access-card-h">{title}</h4>
+      <p className={`access-card-body ${highlight ? "is-featured" : ""}`}>{body}</p>
     </div>
   );
 }
@@ -585,25 +564,24 @@ function Values() {
     ["Teamwork", "Small team. Flat structure. Everyone knows the mission because the people who set it are standing right next to them."],
     ["Access & Service", "Medicaid. Medicare. Special needs. We did not just say we would serve these patients. We built an entire surgery center to prove it."],
   ];
+  const pillColors = ["#B0593A", "#6F7E5E", "#8A5A39", "#B0593A", "#6F7E5E", "#8A5A39"];
   return (
-    <section className="border-t border-[var(--line)]/70">
-      <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-28">
-        <SectionLabel>How we operate</SectionLabel>
-        <h2 className="mt-4 max-w-3xl font-serif text-4xl tracking-[-0.02em] text-[var(--ink)] sm:text-5xl md:text-6xl">
-          What we actually{" "}
-          <em className="italic text-[var(--terracotta)]">care about.</em>
-        </h2>
+    <section className="values-section">
+      <div className="values-inner">
+        <div className="values-header reveal">
+          <div className="story-eyebrow">How we operate</div>
+          <h2 className="story-h2">
+            What we actually{" "}
+            <em style={{ fontStyle: "italic", color: "#B0593A" }}>care about.</em>
+          </h2>
+        </div>
 
-        <div className="mt-12 grid gap-px overflow-hidden rounded-3xl border border-[var(--line)] bg-[var(--line)] sm:grid-cols-2 lg:grid-cols-3">
+        <div className="values-grid">
           {items.map(([h, b], i) => (
-            <div key={h} className="bg-[var(--cream)] p-7">
-              <div className="flex items-baseline gap-3">
-                <span className="font-mono text-xs text-[var(--terracotta)]">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <h3 className="font-serif text-xl tracking-tight text-[var(--ink)]">{h}</h3>
-              </div>
-              <p className="mt-3 text-sm leading-relaxed text-[var(--ink-soft)]">{b}</p>
+            <div key={h} className="values-card reveal">
+              <span className="values-pill" style={{ background: pillColors[i] }} />
+              <h4 className="values-card-h">{h}</h4>
+              <p className="values-card-body">{b}</p>
             </div>
           ))}
         </div>
