@@ -713,26 +713,26 @@ function ContactRow({
 
 function Footer() {
   return (
-    <footer className="border-t border-[var(--line)] bg-[var(--cream)]">
+    <footer className="border-t border-[var(--line)] bg-[var(--espresso)] text-[var(--cream)]">
       <div className="mx-auto max-w-7xl px-5 py-10 sm:px-8">
         <div className="grid gap-8 sm:grid-cols-[1fr_auto] sm:items-end">
           <div>
-            <Wordmark />
-            <p className="mt-4 max-w-md text-sm leading-relaxed text-[var(--ink-soft)]">
+            <Wordmark variant="light" />
+            <p className="mt-4 max-w-md text-sm leading-relaxed text-[var(--cream)]/70">
               19921 E Jackson Dr · Independence, Missouri 64057
               <br />
               816-271-0110 · [email protected]
             </p>
           </div>
-          <nav className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-[var(--ink-soft)]">
+          <nav className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-[var(--cream)]/70">
             {navLinks.map((l) => (
-              <a key={l.href} href={l.href} className="hover:text-[var(--ink)]">
+              <a key={l.href} href={l.href} className="hover:text-[var(--cream)]">
                 {l.label}
               </a>
             ))}
           </nav>
         </div>
-        <div className="mt-10 flex flex-col gap-2 border-t border-[var(--line)] pt-6 text-xs text-[var(--ink-soft)] sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-10 flex flex-col gap-2 border-t border-[var(--cream)]/15 pt-6 text-xs text-[var(--cream)]/60 sm:flex-row sm:items-center sm:justify-between">
           <span>© 2026 Independence Surgery Center. All rights reserved.</span>
           <span>Doctor-owned · Doctor-funded · Opening Q4 2026</span>
         </div>
