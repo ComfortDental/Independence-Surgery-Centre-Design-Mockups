@@ -176,6 +176,12 @@
 
 @utility float-slow { animation: isc-float 6s ease-in-out infinite; }
 
+@keyframes isc-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.25; }
+}
+@utility isc-pulse { animation: isc-pulse 2.4s ease-in-out infinite; }
+
 @utility nav-link {
   position: relative;
   padding-bottom: 4px;
