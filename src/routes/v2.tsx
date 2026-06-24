@@ -921,7 +921,6 @@ function HowToRefer() {
 
 function ColdOpen() {
   const [done, setDone] = useState(false);
-  const [started, setStarted] = useState(false);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -929,11 +928,10 @@ function ColdOpen() {
       setDone(true);
       return;
     }
-  }, []);
-
-  const begin = () => {
-    setStarted(true);
-    // bass tone
+    // Lock scroll while the cold open plays
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    // Bass tone (best-effort; browsers may block autoplay until user gesture)
     try {
       const Ctx = (window.AudioContext || (window as any).webkitAudioContext) as
         | typeof AudioContext
@@ -954,34 +952,32 @@ function ColdOpen() {
     } catch {
       /* no-op */
     }
-    // play sequence then dismiss
-    window.setTimeout(() => {
+    const t = window.setTimeout(() => {
       sessionStorage.setItem("isc-v2-cold-open", "1");
+      document.body.style.overflow = prevOverflow;
       setDone(true);
     }, 6800);
-  };
+    return () => {
+      window.clearTimeout(t);
+      document.body.style.overflow = prevOverflow;
+    };
+  }, []);
 
   if (done) return null;
 
   return (
-    <div className={`v2-cold ${started ? "is-running" : ""}`}>
-      {!started ? (
-        <button className="v2-cold-enter" onClick={begin}>
-          Enter <span aria-hidden>→</span>
-        </button>
-      ) : (
-        <div className="v2-cold-stage">
-          <div className="v2-cold-zero">Zero.</div>
-          <div className="v2-cold-line2">
-            <span>Private oral surgeons</span> <span>in Kansas City</span>{" "}
-            <span>accepting Medicaid.</span>
-          </div>
-          <div className="v2-cold-line3">
-            <span>We</span> <span>built</span> <span>a</span> <span>surgery</span>{" "}
-            <span>center.</span>
-          </div>
+    <div className="v2-cold is-running">
+      <div className="v2-cold-stage">
+        <div className="v2-cold-zero">Zero.</div>
+        <div className="v2-cold-line2">
+          <span>Private oral surgeons</span> <span>in Kansas City</span>{" "}
+          <span>accepting Medicaid.</span>
         </div>
-      )}
+        <div className="v2-cold-line3">
+          <span>We</span> <span>built</span> <span>a</span> <span>surgery</span>{" "}
+          <span>center.</span>
+        </div>
+      </div>
     </div>
   );
 }
@@ -989,20 +985,33 @@ function ColdOpen() {
 function Spine() {
   useEffect(() => {
     const fill = document.querySelector<HTMLElement>(".v2-spine-fill");
-    if (!fill) return;
+    const spine = document.querySelector<HTMLElement>(".v2-spine");
+    if (!fill || !spine) return;
     let raf = 0;
     const onScroll = () => {
       cancelAnimationFrame(raf);
       raf = requestAnimationFrame(() => {
-        const max = document.body.scrollHeight - window.innerHeight;
-        const p = max > 0 ? window.scrollY / max : 0;
+        const nav = document.getElementById("top");
+        const footer = document.querySelector<HTMLElement>(".isc-footer");
+        const startY = nav ? nav.getBoundingClientRect().bottom + window.scrollY : 0;
+        const endY = footer
+          ? footer.getBoundingClientRect().top + window.scrollY
+          : document.body.scrollHeight;
+        // Position the spine track between header and footer
+        spine.style.top = `${startY}px`;
+        spine.style.height = `${Math.max(endY - startY, 0)}px`;
+        // Progress based on viewport center between those bounds
+        const viewport = window.scrollY + window.innerHeight * 0.5;
+        const p = (viewport - startY) / Math.max(endY - startY, 1);
         fill.style.height = `${Math.min(Math.max(p, 0), 1) * 100}%`;
       });
     };
     window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
     onScroll();
     return () => {
       window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
       cancelAnimationFrame(raf);
     };
   }, []);
