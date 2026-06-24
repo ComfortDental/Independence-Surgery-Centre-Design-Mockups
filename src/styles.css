@@ -1247,3 +1247,144 @@
   .how-refer-section { padding: 72px 6vw; }
   .how-refer-steps { grid-template-columns: 1fr; gap: 16px; }
 }
+
+/* ============================================================
+   V2 ELITE LAYER
+   ============================================================ */
+
+/* Cold open overlay */
+.v2-cold {
+  position: fixed; inset: 0; z-index: 200;
+  background: #1a1612;
+  display: grid; place-items: center;
+  color: #F7F2EA;
+  animation: v2ColdExit 0.6s ease 6.2s forwards;
+}
+.v2-cold:not(.is-running) { animation: none; }
+@keyframes v2ColdExit { to { opacity: 0; visibility: hidden; } }
+.v2-cold-enter {
+  font-family: 'Figtree', sans-serif;
+  font-size: 13px; letter-spacing: 3px; text-transform: uppercase;
+  color: #F7F2EA; background: transparent;
+  border: 1px solid #5B5247; padding: 18px 36px; border-radius: 100px;
+  cursor: pointer; transition: all .4s cubic-bezier(.22,1,.36,1);
+}
+.v2-cold-enter:hover { background: #F7F2EA; color: #1a1612; border-color: #F7F2EA; }
+.v2-cold-stage { text-align: center; max-width: 90vw; }
+.v2-cold-zero {
+  font-family: 'Spectral', serif; font-weight: 300;
+  font-size: clamp(120px, 22vw, 280px);
+  line-height: .9; color: #fff;
+  opacity: 0; animation: v2ZeroIn 1s cubic-bezier(.22,1,.36,1) .2s forwards;
+}
+@keyframes v2ZeroIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+.v2-cold-line2, .v2-cold-line3 {
+  font-family: 'Figtree', sans-serif; font-weight: 400;
+  color: #C9BFAF; margin-top: 28px;
+  font-size: clamp(15px, 1.8vw, 22px); letter-spacing: .02em;
+}
+.v2-cold-line3 { margin-top: 36px; color: #F7F2EA; font-weight: 500; }
+.v2-cold-line2 span, .v2-cold-line3 span {
+  display: inline-block; opacity: 0; transform: translateY(10px);
+  animation: v2WordIn .4s cubic-bezier(.22,1,.36,1) forwards;
+}
+@keyframes v2WordIn { to { opacity: 1; transform: translateY(0); } }
+.v2-cold-line2 span:nth-child(1) { animation-delay: 1.4s; }
+.v2-cold-line2 span:nth-child(2) { animation-delay: 1.65s; }
+.v2-cold-line2 span:nth-child(3) { animation-delay: 1.9s; }
+.v2-cold-line3 span:nth-child(1) { animation-delay: 3.2s; }
+.v2-cold-line3 span:nth-child(2) { animation-delay: 3.4s; }
+.v2-cold-line3 span:nth-child(3) { animation-delay: 3.6s; }
+.v2-cold-line3 span:nth-child(4) { animation-delay: 3.85s; }
+.v2-cold-line3 span:nth-child(5) { animation-delay: 4.1s; }
+
+/* Spine */
+.v2-spine {
+  position: fixed; left: 3vw; top: 0;
+  width: 1px; height: 100vh;
+  background: #E7DCC9; z-index: 40;
+  pointer-events: none;
+}
+.v2-spine-fill {
+  position: absolute; top: 0; left: 0;
+  width: 1px; background: #B0593A;
+  height: 0; transition: height .1s linear;
+}
+@media (max-width: 900px) { .v2-spine { display: none; } }
+
+/* Pull quote */
+.v2-pullquote {
+  background: #F7F2EA;
+  padding: 140px 6vw;
+  text-align: center;
+}
+.v2-pullquote p {
+  font-family: 'Spectral', serif;
+  font-style: italic; font-weight: 400;
+  font-size: clamp(26px, 4vw, 52px);
+  line-height: 1.35; color: #2A241D;
+  max-width: 900px; margin: 0 auto;
+}
+
+/* Number wall */
+.v2-numberwall {
+  background: #FFFDF9;
+  padding: 120px 6vw;
+  border-top: 1px solid #EFE6D6;
+}
+.v2-numberwall-eyebrow {
+  font-family: 'Figtree', sans-serif; font-size: 11px;
+  letter-spacing: 3px; text-transform: uppercase;
+  color: #B0593A; font-weight: 600;
+  margin-bottom: 60px; max-width: 1180px; margin-left: auto; margin-right: auto;
+}
+.v2-numberwall-row {
+  max-width: 1180px; margin: 0 auto;
+  padding: 48px 0;
+  border-bottom: 1px solid #EFE6D6;
+  display: grid; grid-template-columns: 1.2fr 1fr; gap: 60px;
+  align-items: baseline;
+}
+.v2-numberwall-row:last-child { border-bottom: none; }
+.v2-numberwall-row h3 {
+  font-family: 'Spectral', serif; font-weight: 400;
+  font-size: clamp(48px, 7vw, 96px);
+  letter-spacing: -0.02em; line-height: 1;
+  color: #2A241D; margin: 0;
+}
+.v2-numberwall-row p {
+  font-size: 17px; line-height: 1.6; color: #5B5247; margin: 0;
+}
+@media (max-width: 900px) {
+  .v2-numberwall-row { grid-template-columns: 1fr; gap: 16px; }
+}
+
+/* Parallax building */
+.v2-facility {
+  background: #F7F2EA;
+  padding: 118px 0 60px;
+}
+.v2-facility-header {
+  max-width: 1180px; margin: 0 auto 60px;
+  padding: 0 6vw;
+}
+.v2-building-moment {
+  position: relative;
+  height: 80vh; min-height: 520px;
+  overflow: hidden; margin-bottom: 24px;
+}
+.v2-building-img {
+  position: absolute; inset: -10% 0;
+  width: 100%; height: 120%; object-fit: cover;
+  will-change: transform;
+}
+.v2-building-caption {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  padding: 48px 6vw;
+  background: linear-gradient(to top, rgba(26,22,18,.85), transparent);
+  color: #F7F2EA;
+  font-family: 'Spectral', serif; font-style: italic;
+  font-size: clamp(20px, 2.4vw, 30px);
+  line-height: 1.4;
+  max-width: 1100px;
+}
