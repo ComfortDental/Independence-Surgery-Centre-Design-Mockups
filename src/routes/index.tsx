@@ -126,8 +126,28 @@ function Hero() {
   return (
     <section className="relative overflow-hidden">
       <div className="mx-auto max-w-7xl px-5 pt-10 pb-16 sm:px-8 sm:pt-14 sm:pb-24">
-        <div className="inline-flex items-center gap-2 rounded-full border border-[var(--line)] bg-[var(--cream)] px-4 py-1.5 text-[0.7rem] font-semibold uppercase tracking-[0.22em] text-[var(--ink-soft)]">
-          <span className="h-1.5 w-1.5 rounded-full bg-[var(--terracotta)]" />
+        <div
+          className="inline-flex items-center gap-2 bg-white"
+          style={{
+            border: "1px solid #E7DCC9",
+            borderRadius: "100px",
+            padding: "8px 16px",
+            color: "#6F7E5E",
+            fontSize: "11px",
+            fontWeight: 600,
+            letterSpacing: "2px",
+            textTransform: "uppercase",
+          }}
+        >
+          <span
+            className="isc-pulse inline-block"
+            style={{
+              width: "6px",
+              height: "6px",
+              borderRadius: "999px",
+              background: "#6F7E5E",
+            }}
+          />
           Opening Q4 2026 · Independence, MO
         </div>
 
