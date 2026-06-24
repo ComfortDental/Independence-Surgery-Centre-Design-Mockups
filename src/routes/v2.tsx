@@ -174,15 +174,18 @@ function Index() {
   useCountUp();
   useMagnetic();
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen bg-background text-foreground v2-root">
+      <ColdOpen />
+      <Spine />
       <Nav />
       <Hero />
       <Story />
+      <PullQuote />
       <Care />
       <Doctors />
       <HowToRefer />
-      <Facility />
-      <Access />
+      <FacilityParallax />
+      <NumberWall />
       <Values />
       <Refer />
       <Footer />
