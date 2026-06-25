@@ -1001,42 +1001,13 @@ function Spine() {
     if (!fill || !spine) return;
 
     let raf = 0;
-    let measureTimer = 0;
-    let measureRaf = 0;
     let startY = 0;
     let endY = 0;
-    let lastProgress = -1;
-    const supportsNativeScrollTimeline =
-      typeof CSS !== "undefined" &&
-      (CSS.supports("animation-timeline: scroll(root block)") ||
-        CSS.supports("animation-timeline: scroll()"));
 
     fill.style.height = "100%";
     fill.style.transformOrigin = "top";
     fill.style.willChange = "transform";
-
-    if (supportsNativeScrollTimeline) {
-      spine.classList.add("is-native");
-      spine.classList.remove("is-js");
-      // Let the compositor-driven CSS scroll timeline own progress. This stays
-      // locked to the browser scrollbar even during fast trackpad/wheel flings.
-      fill.style.removeProperty("transform");
-    } else {
-      spine.classList.add("is-js");
-      spine.classList.remove("is-native");
-    }
-
-    const update = () => {
-      const scroller = document.scrollingElement || document.documentElement;
-      const scrollMax = Math.max(scroller.scrollHeight - window.innerHeight, 1);
-      const p = scroller.scrollTop / scrollMax;
-      const clamped = Math.min(Math.max(p, 0), 1);
-      if (Math.abs(clamped - lastProgress) > 0.0005) {
-        fill.style.transform = `scaleY(${clamped})`;
-        lastProgress = clamped;
-      }
-      return scroller.scrollTop;
-    };
+    fill.style.transform = "scaleY(0)";
 
     const measure = () => {
       const nav = document.getElementById("top");
@@ -1045,67 +1016,40 @@ function Spine() {
       const nextEnd = footer
         ? footer.getBoundingClientRect().top + window.scrollY
         : document.body.scrollHeight;
-      const roundedStart = Math.round(nextStart);
-      const roundedEnd = Math.round(nextEnd);
-      // Avoid pointless writes that retrigger layout/ResizeObserver loops.
-      if (roundedStart !== startY || roundedEnd !== endY) {
-        startY = roundedStart;
-        endY = roundedEnd;
-        spine.style.top = `${startY}px`;
-        spine.style.height = `${Math.max(endY - startY, 0)}px`;
-      }
-      if (!supportsNativeScrollTimeline) update();
-    };
-
-    const scheduleMeasure = () => {
-      window.clearTimeout(measureTimer);
-      cancelAnimationFrame(measureRaf);
-      measureRaf = requestAnimationFrame(measure);
-      measureTimer = window.setTimeout(measure, 180);
+      startY = Math.round(nextStart);
+      endY = Math.round(nextEnd);
+      spine.style.top = `${startY}px`;
+      spine.style.height = `${Math.max(endY - startY, 0)}px`;
     };
 
     const tick = () => {
-      // Fallback path only: one cheap compositor transform update per frame so
-      // the spine catches fast scroll jumps even if scroll events are coalesced.
-      if (document.visibilityState !== "hidden") update();
+      const scroller = document.scrollingElement || document.documentElement;
+      const scrollMax = Math.max(scroller.scrollHeight - window.innerHeight, 1);
+      const p = Math.min(Math.max(scroller.scrollTop / scrollMax, 0), 1);
+      fill.style.transform = `scaleY(${p})`;
       raf = requestAnimationFrame(tick);
     };
 
-    const onScroll = () => {
-      if (!supportsNativeScrollTimeline) update();
-    };
-
-    if (!supportsNativeScrollTimeline) {
-      update();
-      raf = requestAnimationFrame(tick);
-    }
-
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", scheduleMeasure);
-    window.addEventListener("load", scheduleMeasure);
-    // Re-measure when layout changes (images loading, fonts, reveals, etc.)
-    // Observe only the footer + nav so reveal-animation transforms in the
-    // body don't fire the observer on every frame and cause spine jitter.
-    const ro = new ResizeObserver(scheduleMeasure);
-    const nav = document.getElementById("top");
-    const footer = document.querySelector<HTMLElement>(".isc-footer");
-    if (nav) ro.observe(nav);
-    if (footer) ro.observe(footer);
     measure();
-    // Settle measurement after cold-open / late images
+    raf = requestAnimationFrame(tick);
+
+    window.addEventListener("resize", measure);
+    window.addEventListener("load", measure);
+    const ro = new ResizeObserver(measure);
+    const navEl = document.getElementById("top");
+    const footerEl = document.querySelector<HTMLElement>(".isc-footer");
+    if (navEl) ro.observe(navEl);
+    if (footerEl) ro.observe(footerEl);
     const t1 = window.setTimeout(measure, 800);
     const t2 = window.setTimeout(measure, 2400);
+
     return () => {
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", scheduleMeasure);
-      window.removeEventListener("load", scheduleMeasure);
+      window.removeEventListener("resize", measure);
+      window.removeEventListener("load", measure);
       ro.disconnect();
       window.clearTimeout(t1);
       window.clearTimeout(t2);
-      window.clearTimeout(measureTimer);
-      cancelAnimationFrame(measureRaf);
       cancelAnimationFrame(raf);
-      spine.classList.remove("is-native", "is-js");
     };
   }, []);
   return (
