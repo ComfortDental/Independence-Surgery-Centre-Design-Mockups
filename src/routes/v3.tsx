@@ -314,12 +314,10 @@ function Story() {
           <div className="story-text">
             <p className="story-lead">
               Two years ago, a speaker at a conference put up a single number.{" "}
-              <span style={{ color: "#B0593A", fontWeight: 600 }}>Zero.</span> Not one private oral
-              surgeon in the area accepted Medicaid. Then the talk turned to children.
-            </p>
-            <p>
-              Kids with infections spreading through their jaws. Kids who needed surgery under
-              general anesthesia and couldn't get into a hospital OR for up to a year.
+              <span style={{ color: "#B0593A", fontWeight: 600 }}>Zero.</span> Then the talk turned
+              to children. Kids with special needs. Kids with infections spreading through their
+              jaws. Kids who needed surgery under general anesthesia and couldn't get into a
+              hospital OR for up to a year.
             </p>
             <p>
               A four-year-old who won't eat because it hurts too much and can't tell you why. A
