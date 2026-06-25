@@ -1012,9 +1012,9 @@ function Spine() {
       measureTimer = window.setTimeout(measure, 120);
     };
     const update = () => {
-      const viewport = window.scrollY + window.innerHeight * 0.5;
-      const span = Math.max(endY - startY, 1);
-      const p = (viewport - startY) / span;
+      const doc = document.documentElement;
+      const scrollMax = Math.max(doc.scrollHeight - window.innerHeight, 1);
+      const p = window.scrollY / scrollMax;
       fill.style.height = `${Math.min(Math.max(p, 0), 1) * 100}%`;
     };
     const onScroll = () => {
