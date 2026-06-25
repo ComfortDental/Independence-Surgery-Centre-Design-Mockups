@@ -458,7 +458,10 @@ input[type="search"], input[type="password"], input[type="number"], textarea {
   color: #5B5247;
 }
 @media (min-width: 768px) {
-  .isc-nav-links { display: flex; }
+  .isc-nav-links { display: flex !important; }
+  .isc-nav-cta { display: inline-flex !important; }
+  .isc-burger,
+  .isc-nav > .isc-mobile-panel { display: none !important; }
 }
 .isc-nav-links a { color: #5B5247; }
 .isc-nav-links a:hover { color: #2A241D; }
@@ -2741,8 +2744,20 @@ input[type="search"], input[type="password"], input[type="number"], textarea {
 /* Responsive fixes — v3 & v4 (nav, story, hero stats, cards)   */
 /* ============================================================ */
 
-/* Nav: ensure Tailwind .hidden beats utility-class overrides */
-.isc-nav .hidden { display: none !important; }
+/* Nav: keep the shared custom nav CSS aligned with the 768px breakpoint */
+@media (max-width: 767px) {
+  .isc-nav .isc-nav-links,
+  .isc-nav .isc-nav-cta { display: none !important; }
+  .isc-nav .isc-burger { display: grid !important; }
+  .isc-nav > .isc-mobile-panel { display: block !important; }
+}
+
+@media (min-width: 768px) {
+  .isc-nav .isc-nav-links { display: flex !important; }
+  .isc-nav .isc-nav-cta { display: inline-flex !important; }
+  .isc-nav .isc-burger,
+  .isc-nav > .isc-mobile-panel { display: none !important; }
+}
 
 /* Story grid: stack on tablet/mobile in v3 & v4 (they override base) */
 @media (max-width: 900px) {
