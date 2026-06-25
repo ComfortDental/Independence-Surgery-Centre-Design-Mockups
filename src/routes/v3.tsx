@@ -461,14 +461,14 @@ function Doctors() {
           <DoctorCard
             specialty="Oral & Maxillofacial Surgery"
             tag="Board-Certified Specialist"
-            tagColor="#B0593A"
+            tagColor="#2E5C4E"
             body="MD and DMD. Fellowship trained. Board certified by the American Board of Oral and Maxillofacial Surgery. That is the ceiling of the specialty, and he is at it. He could practice anywhere. He chose to build something."
             credentials={["MD + DMD", "Board Certified ABOMS", "Owner-Operator"]}
           />
           <DoctorCard
             specialty="Pediatric Dentistry"
             tag="Board-Certified Specialist"
-            tagColor="#5E6E4D"
+            tagColor="#8A5A39"
             body="Board certified. Advanced residency in hospital-based pediatric dentistry and special needs care. The cases other offices can't handle are the ones she built her career around. She is not here by default. She helped design this place."
             credentials={["Board Certified Pediatric Dentist", "Owner-Operator"]}
           />
