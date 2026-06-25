@@ -48,13 +48,6 @@ const versions: Version[] = [
     desc: "Line-reveal hero, parallax, diagonal cut, urgency-led copy.",
     palette: ["#0F2A22", "#FFD2A8", "#F2EDE2", "#1F4A3D"],
   },
-  {
-    to: "/v5",
-    tag: "v5",
-    name: "The Door That Opens",
-    desc: "Cinematic editorial. Ink, bone, surgical amber. Fraunces + Geist.",
-    palette: ["#0B0B0C", "#F4F1EA", "#C8923A", "#E6C79A"],
-  },
 ];
 
 function Hub() {
@@ -67,7 +60,7 @@ function Hub() {
 
       <section className="hub-intro">
         <p className="hub-eyebrow"><span className="hub-dot" /> Independence Surgery Center</p>
-        <h1>Five directions. One mission.</h1>
+        <h1>Four directions. One mission.</h1>
         <p className="hub-lede">
           Each version explores a different visual voice for the same story —
           a doctor-owned surgery center for the patients everyone else turned away.
