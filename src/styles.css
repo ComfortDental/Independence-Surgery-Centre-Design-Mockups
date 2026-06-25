@@ -425,13 +425,14 @@ html {
   position: sticky;
   top: 0;
   z-index: 100;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  display: block;
   padding: 18px 6vw;
   background: rgba(247, 242, 234, 0.86);
   backdrop-filter: blur(14px);
   border-bottom: 1px solid #E7DCC9;
+}
+.isc-nav > .isc-mobile-panel {
+  margin: 18px -6vw -18px;
 }
 .isc-nav-right {
   display: flex;
