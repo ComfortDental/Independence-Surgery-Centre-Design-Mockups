@@ -60,11 +60,6 @@ function Hub() {
 
       <section className="hub-intro">
         <p className="hub-eyebrow"><span className="hub-dot" /> Independence Surgery Center</p>
-        <h1>Four directions. One mission.</h1>
-        <p className="hub-lede">
-          Each version explores a different visual voice for the same story —
-          a doctor-owned surgery center for the patients everyone else turned away.
-        </p>
       </section>
 
       <section className="hub-grid">
