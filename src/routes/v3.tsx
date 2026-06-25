@@ -178,7 +178,6 @@ function Index() {
       <Story />
       <Care />
       <Doctors />
-      <HowToRefer />
       <Facility />
       <Access />
       <Values />
@@ -557,10 +556,10 @@ function Facility() {
 
         <div className="facility-grid v3-facility-strip">
           {[
-            ["Purpose-Built Design", "Engineered from the ground up for surgical efficiency — not converted from something else."],
-            ["Multiple Operating Rooms", "Simultaneous cases running in parallel. Shorter wait times. Higher throughput."],
-            ["Hospital-Grade Monitoring", "Full anesthesia capability. Same monitoring, same safety standards, same equipment as a hospital OR."],
-            ["Kansas City Metro", "Centrally located in Independence. Easy access from anywhere in the KC metro."],
+            ["Purpose-Built Design", "Engineered from the ground up for surgical efficiency — not converted."],
+            ["Multiple Operating Rooms", "Simultaneous cases in parallel. Shorter waits. Higher throughput."],
+            ["Hospital-Grade Monitoring", "Full anesthesia capability. Same standards, same equipment as a hospital OR."],
+            ["Kansas City Metro", "Centrally located in Independence. Easy access across the KC metro."],
           ].map(([h, b], i) => (
             <div key={h} className="facility-card v3-facility-cell reveal">
               <div className="v3-facility-num">0{i + 1}</div>
@@ -809,7 +808,7 @@ function Footer() {
             <a href="tel:8162710110">816-271-0110</a> · <a href="mailto:[email protected]">[email protected]</a>
           </div>
           <div className="isc-footer-copy">
-            © 2026 Independence Surgery Center · Doctor-owned · Opening Q4 2026
+            © 2026 Independence Surgery Center. All rights reserved.
           </div>
         </div>
       </div>
