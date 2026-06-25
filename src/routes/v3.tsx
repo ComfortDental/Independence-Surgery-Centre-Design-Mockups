@@ -268,9 +268,9 @@ function Hero() {
           Opening Q4 2026 · Independence, MO
         </div>
         <h1 className="v3-hero-h1">
-          The surgery center<br />
-          that should<br />
-          already exist.
+          Real operating rooms.<br />
+          Real specialists.<br />
+          <em style={{ fontStyle: "italic", color: "#9FC6B5" }}>Real access.</em>
         </h1>
         <p className="v3-hero-sub">
           A brand-new ambulatory surgery center. Doctor-owned. Doctor-funded. Built so
@@ -284,15 +284,15 @@ function Hero() {
       <div className="v3-hero-stats">
         <div className="v3-hero-stat">
           <div className="v3-hero-stat-label">Medicaid</div>
-          <div className="v3-hero-stat-sub">Accepted from day one</div>
+          <div className="v3-hero-stat-sub">Accepted — no asterisks</div>
         </div>
         <div className="v3-hero-stat">
           <div className="v3-hero-stat-label">Multiple ORs</div>
-          <div className="v3-hero-stat-sub">Hospital-grade infrastructure</div>
+          <div className="v3-hero-stat-sub">Hospital-grade monitoring</div>
         </div>
         <div className="v3-hero-stat">
           <div className="v3-hero-stat-label">Owner-operated</div>
-          <div className="v3-hero-stat-sub">The doctors funded the building</div>
+          <div className="v3-hero-stat-sub">Board-certified specialists</div>
         </div>
       </div>
     </section>
