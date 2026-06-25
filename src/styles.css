@@ -2617,3 +2617,122 @@ input[type="search"], input[type="password"], input[type="number"], textarea {
   .v5 .v5-people-row { grid-template-columns: 1fr; }
   .v5 .v5-form-row { grid-template-columns: 1fr; }
 }
+
+/* ============================================================ */
+/* Version hub (/) — index of all design directions             */
+/* ============================================================ */
+.hub {
+  min-height: 100vh;
+  background: #0b0b0c;
+  color: #f4f1ea;
+  font-family: "Geist", "Inter", system-ui, sans-serif;
+  padding: 32px clamp(20px, 5vw, 64px) 48px;
+  display: flex; flex-direction: column;
+  letter-spacing: -0.005em;
+}
+.hub *::selection { background: #f4f1ea; color: #0b0b0c; }
+
+.hub-nav {
+  display: flex; align-items: center; justify-content: space-between;
+  padding-bottom: 28px; border-bottom: 1px solid rgba(244,241,234,0.08);
+}
+.hub-nav img { height: 30px; width: auto; filter: brightness(0) invert(1); opacity: 0.92; }
+.hub-nav-meta { font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(244,241,234,0.45); }
+
+.hub-intro {
+  padding: clamp(60px, 11vh, 120px) 0 clamp(40px, 6vh, 64px);
+  max-width: 780px;
+}
+.hub-eyebrow {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+  color: rgba(244,241,234,0.6); margin: 0 0 28px;
+}
+.hub-dot {
+  width: 6px; height: 6px; border-radius: 99px; background: #c8923a;
+  box-shadow: 0 0 0 4px rgba(200,146,58,0.18);
+}
+.hub-intro h1 {
+  font-family: "Fraunces", "Newsreader", Georgia, serif;
+  font-weight: 350; font-size: clamp(2.4rem, 5.6vw, 4.4rem);
+  line-height: 1.02; letter-spacing: -0.028em;
+  margin: 0 0 24px;
+}
+.hub-lede {
+  font-size: clamp(1rem, 1.3vw, 1.125rem);
+  line-height: 1.6; color: rgba(244,241,234,0.7);
+  max-width: 56ch; margin: 0;
+}
+
+.hub-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 18px;
+  margin-top: 8px;
+}
+.hub-card {
+  position: relative;
+  display: flex; flex-direction: column; gap: 18px;
+  padding: 24px 24px 22px;
+  background: #131315;
+  border: 1px solid rgba(244,241,234,0.07);
+  color: #f4f1ea;
+  text-decoration: none;
+  opacity: 0; transform: translateY(14px);
+  animation: hubIn 0.7s cubic-bezier(.2,.7,.2,1) forwards;
+  transition: background .35s ease, border-color .35s ease, transform .35s ease;
+  min-height: 260px;
+}
+.hub-card:hover {
+  background: #1a1a1d;
+  border-color: rgba(200,146,58,0.4);
+  transform: translateY(-3px);
+}
+.hub-card-head {
+  display: flex; align-items: center; justify-content: space-between;
+}
+.hub-tag {
+  font-family: "Fraunces", serif; font-size: 13px; letter-spacing: 0;
+  color: rgba(244,241,234,0.55);
+}
+.hub-arrow {
+  font-size: 18px; color: rgba(244,241,234,0.45);
+  transition: transform .35s ease, color .35s ease;
+}
+.hub-card:hover .hub-arrow { transform: translateX(6px); color: #c8923a; }
+
+.hub-swatch {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 4px; height: 36px;
+}
+.hub-swatch span { display: block; border-radius: 2px; }
+
+.hub-card h2 {
+  font-family: "Fraunces", serif;
+  font-size: 20px; line-height: 1.2; letter-spacing: -0.015em;
+  font-weight: 400; margin: 0;
+}
+.hub-card p {
+  font-size: 13.5px; line-height: 1.55;
+  color: rgba(244,241,234,0.6); margin: 0;
+  flex: 1;
+}
+.hub-cta {
+  font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+  color: #c8923a; padding-top: 8px;
+  border-top: 1px solid rgba(244,241,234,0.08);
+}
+
+.hub-foot {
+  margin-top: 64px; padding-top: 24px;
+  border-top: 1px solid rgba(244,241,234,0.08);
+  display: flex; justify-content: space-between;
+  font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+  color: rgba(244,241,234,0.4);
+}
+
+@keyframes hubIn { to { opacity: 1; transform: none; } }
+
+@media (max-width: 540px) {
+  .hub-foot { flex-direction: column; gap: 8px; }
+}
