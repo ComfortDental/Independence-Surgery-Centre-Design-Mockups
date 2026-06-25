@@ -77,20 +77,32 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "Independence Surgery Center — Care for the patients everyone else turned away" },
+      {
+        name: "description",
+        content:
+          "A doctor-owned surgery center built for the patients other practices won't see. Opening Q4 2026 in Independence, Missouri.",
+      },
+      { name: "author", content: "Independence Surgery Center" },
+      {
+        property: "og:title",
+        content: "Independence Surgery Center — Care for the patients everyone else turned away",
+      },
+      {
+        property: "og:description",
+        content:
+          "A doctor-owned surgery center built for the patients other practices won't see. Opening Q4 2026 in Independence, Missouri.",
+      },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
+      { property: "og:site_name", content: "Independence Surgery Center" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [
       {
         rel: "stylesheet",
         href: appCss,
       },
+      { rel: "icon", href: "data:," },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
