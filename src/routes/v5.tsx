@@ -161,18 +161,44 @@ function FloatingRefer() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
   return (
-    <a href="#refer" className={`floating-refer v3-floating magnetic ${visible ? "visible" : ""}`}>
+    <a href="#refer" className={`floating-refer v3-floating v5-floating magnetic ${visible ? "visible" : ""}`}>
       Refer a Patient <span aria-hidden>→</span>
     </a>
   );
+}
+
+function useHeroParallax() {
+  useEffect(() => {
+    const img = document.querySelector<HTMLElement>(".v5 .v3-hero-img");
+    if (!img) return;
+    let raf = 0;
+    const tick = () => {
+      raf = 0;
+      const y = window.scrollY;
+      // Only apply while hero is reasonably in view to avoid jank far down.
+      if (y < window.innerHeight * 1.4) {
+        img.style.transform = `translate3d(0, ${y * 0.28}px, 0) scale(1.06)`;
+      }
+    };
+    const onScroll = () => {
+      if (!raf) raf = requestAnimationFrame(tick);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    tick();
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      if (raf) cancelAnimationFrame(raf);
+    };
+  }, []);
 }
 
 function Index() {
   useReveal();
   useCountUp();
   useMagnetic();
+  useHeroParallax();
   return (
-    <div className="v3 min-h-screen bg-background text-foreground">
+    <div className="v3 v5 min-h-screen bg-background text-foreground">
       <Nav />
       <Hero />
       <Story />
