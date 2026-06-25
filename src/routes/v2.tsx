@@ -987,8 +987,7 @@ function ColdOpen() {
           <span>accepting Medicaid.</span>
         </div>
         <div className="v2-cold-line3">
-          <span>We</span> <span>built</span> <span>a</span> <span>surgery</span>{" "}
-          <span>center.</span>
+          <span>NOT</span> <span>ANYMORE</span>
         </div>
       </div>
     </div>
