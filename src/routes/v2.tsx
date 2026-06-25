@@ -1024,8 +1024,8 @@ function Spine() {
 
     const tick = () => {
       const scroller = document.scrollingElement || document.documentElement;
-      const range = Math.max(endY - startY, 1);
-      const traveled = scroller.scrollTop + window.innerHeight - startY;
+      const range = Math.max((endY - window.innerHeight) - startY, 1);
+      const traveled = scroller.scrollTop - startY;
       const p = Math.min(Math.max(traveled / range, 0), 1);
       fill.style.transform = `scaleY(${p})`;
       raf = requestAnimationFrame(tick);
