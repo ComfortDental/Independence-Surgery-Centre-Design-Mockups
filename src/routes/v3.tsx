@@ -509,8 +509,12 @@ function DoctorCard({
       </div>
       <p className="doctor-body">{body}</p>
       <div className="doctor-pills">
-        {credentials.map((c) => (
-          <span key={c} className="doctor-pill">
+        {credentials.map((c, i) => (
+          <span
+            key={c}
+            className={`doctor-pill ${i === 0 ? "v3-doctor-pill-primary" : ""}`}
+            style={i === 0 ? { background: tagColor, borderColor: tagColor, color: "#fff" } : undefined}
+          >
             {c}
           </span>
         ))}
