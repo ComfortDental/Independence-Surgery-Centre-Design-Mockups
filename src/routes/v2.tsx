@@ -987,16 +987,45 @@ function Spine() {
     const fill = document.querySelector<HTMLElement>(".v2-spine-fill");
     const spine = document.querySelector<HTMLElement>(".v2-spine");
     if (!fill || !spine) return;
+
     let raf = 0;
     let measureTimer = 0;
+    let measureRaf = 0;
     let startY = 0;
     let endY = 0;
-    let ticking = false;
-    let idleFrames = 0;
-    let lastScrollTop = -1;
+    let lastProgress = -1;
+    const supportsNativeScrollTimeline =
+      typeof CSS !== "undefined" &&
+      (CSS.supports("animation-timeline: scroll(root block)") ||
+        CSS.supports("animation-timeline: scroll()"));
+
     fill.style.height = "100%";
     fill.style.transformOrigin = "top";
     fill.style.willChange = "transform";
+
+    if (supportsNativeScrollTimeline) {
+      spine.classList.add("is-native");
+      spine.classList.remove("is-js");
+      // Let the compositor-driven CSS scroll timeline own progress. This stays
+      // locked to the browser scrollbar even during fast trackpad/wheel flings.
+      fill.style.removeProperty("transform");
+    } else {
+      spine.classList.add("is-js");
+      spine.classList.remove("is-native");
+    }
+
+    const update = () => {
+      const scroller = document.scrollingElement || document.documentElement;
+      const scrollMax = Math.max(scroller.scrollHeight - window.innerHeight, 1);
+      const p = scroller.scrollTop / scrollMax;
+      const clamped = Math.min(Math.max(p, 0), 1);
+      if (Math.abs(clamped - lastProgress) > 0.0005) {
+        fill.style.transform = `scaleY(${clamped})`;
+        lastProgress = clamped;
+      }
+      return scroller.scrollTop;
+    };
+
     const measure = () => {
       const nav = document.getElementById("top");
       const footer = document.querySelector<HTMLElement>(".isc-footer");
@@ -1004,48 +1033,41 @@ function Spine() {
       const nextEnd = footer
         ? footer.getBoundingClientRect().top + window.scrollY
         : document.body.scrollHeight;
+      const roundedStart = Math.round(nextStart);
+      const roundedEnd = Math.round(nextEnd);
       // Avoid pointless writes that retrigger layout/ResizeObserver loops.
-      if (nextStart !== startY || nextEnd !== endY) {
-        startY = nextStart;
-        endY = nextEnd;
+      if (roundedStart !== startY || roundedEnd !== endY) {
+        startY = roundedStart;
+        endY = roundedEnd;
         spine.style.top = `${startY}px`;
         spine.style.height = `${Math.max(endY - startY, 0)}px`;
       }
-      update();
+      if (!supportsNativeScrollTimeline) update();
     };
+
     const scheduleMeasure = () => {
       window.clearTimeout(measureTimer);
-      measureTimer = window.setTimeout(measure, 120);
+      cancelAnimationFrame(measureRaf);
+      measureRaf = requestAnimationFrame(measure);
+      measureTimer = window.setTimeout(measure, 180);
     };
-    const update = () => {
-      const scroller = document.scrollingElement || document.documentElement;
-      const scrollMax = Math.max(scroller.scrollHeight - window.innerHeight, 1);
-      const p = scroller.scrollTop / scrollMax;
-      fill.style.transform = `scaleY(${Math.min(Math.max(p, 0), 1)})`;
-      return scroller.scrollTop;
-    };
+
     const tick = () => {
-      const currentScrollTop = update();
-      if (Math.abs(currentScrollTop - lastScrollTop) < 0.5) {
-        idleFrames += 1;
-      } else {
-        idleFrames = 0;
-        lastScrollTop = currentScrollTop;
-      }
-      if (idleFrames < 12) {
-        raf = requestAnimationFrame(tick);
-      } else {
-        ticking = false;
-        raf = 0;
-      }
+      // Fallback path only: one cheap compositor transform update per frame so
+      // the spine catches fast scroll jumps even if scroll events are coalesced.
+      if (document.visibilityState !== "hidden") update();
+      raf = requestAnimationFrame(tick);
     };
+
     const onScroll = () => {
-      idleFrames = 0;
-      if (!ticking) {
-        ticking = true;
-        raf = requestAnimationFrame(tick);
-      }
+      if (!supportsNativeScrollTimeline) update();
     };
+
+    if (!supportsNativeScrollTimeline) {
+      update();
+      raf = requestAnimationFrame(tick);
+    }
+
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", scheduleMeasure);
     window.addEventListener("load", scheduleMeasure);
@@ -1069,7 +1091,9 @@ function Spine() {
       window.clearTimeout(t1);
       window.clearTimeout(t2);
       window.clearTimeout(measureTimer);
+      cancelAnimationFrame(measureRaf);
       cancelAnimationFrame(raf);
+      spine.classList.remove("is-native", "is-js");
     };
   }, []);
   return (
