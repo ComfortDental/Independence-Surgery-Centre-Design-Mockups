@@ -991,6 +991,9 @@ function Spine() {
     let measureTimer = 0;
     let startY = 0;
     let endY = 0;
+    let ticking = false;
+    let idleFrames = 0;
+    let lastScrollTop = -1;
     fill.style.height = "100%";
     fill.style.transformOrigin = "top";
     fill.style.willChange = "transform";
@@ -1019,10 +1022,29 @@ function Spine() {
       const scrollMax = Math.max(scroller.scrollHeight - window.innerHeight, 1);
       const p = scroller.scrollTop / scrollMax;
       fill.style.transform = `scaleY(${Math.min(Math.max(p, 0), 1)})`;
+      return scroller.scrollTop;
+    };
+    const tick = () => {
+      const currentScrollTop = update();
+      if (Math.abs(currentScrollTop - lastScrollTop) < 0.5) {
+        idleFrames += 1;
+      } else {
+        idleFrames = 0;
+        lastScrollTop = currentScrollTop;
+      }
+      if (idleFrames < 12) {
+        raf = requestAnimationFrame(tick);
+      } else {
+        ticking = false;
+        raf = 0;
+      }
     };
     const onScroll = () => {
-      cancelAnimationFrame(raf);
-      raf = requestAnimationFrame(update);
+      idleFrames = 0;
+      if (!ticking) {
+        ticking = true;
+        raf = requestAnimationFrame(tick);
+      }
     };
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", scheduleMeasure);
