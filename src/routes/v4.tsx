@@ -461,7 +461,7 @@ function Care() {
 
         <div className="care-banner reveal">
           Two specialties. One building.{" "}
-          <em style={{ fontStyle: "italic" }}>Designed from scratch</em> to handle volume and do
+          <em style={{ fontStyle: "italic", color: "#8FBFAE" }}>Designed from scratch</em> to handle volume and do
           it safely.
         </div>
       </div>
