@@ -1550,9 +1550,9 @@ input[type="search"], input[type="password"], input[type="number"], textarea {
 .v3 em {
   font-family: 'Newsreader', serif !important;
   font-style: italic !important;
-  font-weight: 400 !important;
+  font-weight: 600 !important;
   letter-spacing: -0.2px !important;
-  color: var(--v3-green) !important;
+  color: #1F4A3D !important;
 }
 
 /* Nav — green CTA, square radii */
