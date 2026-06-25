@@ -1308,7 +1308,23 @@
 .v2-spine-fill {
   position: absolute; top: 0; left: 0;
   width: 1px; background: #B0593A;
-  height: 0;
+  height: 100%;
+  transform: scaleY(0);
+  transform-origin: top;
+  will-change: transform;
+}
+@keyframes v2SpineProgress {
+  from { transform: scaleY(0); }
+  to { transform: scaleY(1); }
+}
+@supports (animation-timeline: scroll()) {
+  .v2-spine-fill {
+    animation-name: v2SpineProgress;
+    animation-duration: 1s;
+    animation-timing-function: linear;
+    animation-fill-mode: both;
+    animation-timeline: scroll(root block);
+  }
 }
 @media (max-width: 900px) { .v2-spine { display: none; } }
 

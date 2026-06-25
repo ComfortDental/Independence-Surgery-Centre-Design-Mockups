@@ -987,6 +987,8 @@ function Spine() {
     const fill = document.querySelector<HTMLElement>(".v2-spine-fill");
     const spine = document.querySelector<HTMLElement>(".v2-spine");
     if (!fill || !spine) return;
+    const usesNativeScrollTimeline =
+      typeof CSS !== "undefined" && CSS.supports("animation-timeline: scroll()");
     let raf = 0;
     let measureTimer = 0;
     let startY = 0;
@@ -1012,10 +1014,11 @@ function Spine() {
       measureTimer = window.setTimeout(measure, 120);
     };
     const update = () => {
+      if (usesNativeScrollTimeline) return;
       const doc = document.documentElement;
       const scrollMax = Math.max(doc.scrollHeight - window.innerHeight, 1);
       const p = window.scrollY / scrollMax;
-      fill.style.height = `${Math.min(Math.max(p, 0), 1) * 100}%`;
+      fill.style.transform = `scaleY(${Math.min(Math.max(p, 0), 1)})`;
     };
     const onScroll = () => {
       cancelAnimationFrame(raf);
