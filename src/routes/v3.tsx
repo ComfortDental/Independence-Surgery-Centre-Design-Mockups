@@ -163,7 +163,7 @@ function FloatingRefer() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
   return (
-    <a href="#refer" className={`floating-refer magnetic ${visible ? "visible" : ""}`}>
+    <a href="#refer" className={`floating-refer v3-floating magnetic ${visible ? "visible" : ""}`}>
       Refer a Patient <span aria-hidden>→</span>
     </a>
   );
@@ -174,7 +174,7 @@ function Index() {
   useCountUp();
   useMagnetic();
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="v3 min-h-screen bg-background text-foreground">
       <Nav />
       <Hero />
       <Story />
