@@ -231,20 +231,20 @@ function Nav() {
       <div className="flex w-full items-center justify-between">
         <Wordmark />
         <div className="isc-nav-right">
-          <nav className="isc-nav-links hidden lg:flex">
+          <nav className="isc-nav-links hidden md:flex">
             {navLinks.slice(0, -1).map((l) => (
               <a key={l.href} href={l.href} className="nav-link">
                 {l.label}
               </a>
             ))}
           </nav>
-          <a href="#refer" className="isc-nav-cta hidden sm:inline-flex">
+          <a href="#refer" className="isc-nav-cta hidden md:inline-flex">
             Refer a Patient <span aria-hidden>→</span>
           </a>
           <button
             type="button"
             onClick={() => setOpen((o) => !o)}
-            className="isc-burger lg:hidden"
+            className="isc-burger md:hidden"
             aria-label="Toggle menu"
             aria-expanded={open}
             data-open={open}
@@ -255,7 +255,7 @@ function Nav() {
           </button>
         </div>
       </div>
-      <div className="isc-mobile-panel lg:hidden" data-open={open}>
+      <div className="isc-mobile-panel md:hidden" data-open={open}>
         <nav className="mx-auto flex max-w-7xl flex-col gap-1 px-5 py-4">
           {navLinks.slice(0, -1).map((l, i) => (
             <a
