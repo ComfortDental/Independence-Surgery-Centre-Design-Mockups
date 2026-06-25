@@ -269,7 +269,7 @@ function Hero() {
         <h1 className="v3-hero-h1">
           Real operating rooms.<br />
           Real specialists.<br />
-          <em style={{ fontStyle: "italic", color: "#9FC6B5" }}>Real access.</em>
+          <em style={{ fontStyle: "italic", color: "#8FBFAF" }}>Real access.</em>
         </h1>
         <p className="v3-hero-sub">
           A brand-new ambulatory surgery center. Doctor-owned. Doctor-funded. Built so
@@ -428,7 +428,7 @@ function Care() {
 
         <div className="care-banner reveal">
           Two specialties. One building.{" "}
-          <em style={{ fontStyle: "italic" }}>Designed from scratch</em> to handle volume and do
+          <em style={{ fontStyle: "italic", color: "#8FBFAF" }}>Designed from scratch</em> to handle volume and do
           it safely.
         </div>
       </div>

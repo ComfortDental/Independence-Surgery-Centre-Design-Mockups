@@ -1904,6 +1904,7 @@ input[type="search"], input[type="password"], input[type="number"], textarea {
 .v3 .form-tab.is-active {
   background: var(--v3-green);
   border-color: var(--v3-green);
+  color: #fff;
 }
 .v3 .form-input {
   background: #fff;
