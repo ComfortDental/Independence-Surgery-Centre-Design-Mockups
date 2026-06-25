@@ -559,14 +559,15 @@ function Facility() {
           ))}
         </div>
 
-        <div className="facility-grid">
+        <div className="facility-grid v3-facility-strip">
           {[
             ["Purpose-Built Design", "Engineered from the ground up for surgical efficiency — not converted from something else."],
             ["Multiple Operating Rooms", "Simultaneous cases running in parallel. Shorter wait times. Higher throughput."],
             ["Hospital-Grade Monitoring", "Full anesthesia capability. Same monitoring, same safety standards, same equipment as a hospital OR."],
             ["Kansas City Metro", "Centrally located in Independence. Easy access from anywhere in the KC metro."],
-          ].map(([h, b]) => (
-            <div key={h} className="facility-card reveal">
+          ].map(([h, b], i) => (
+            <div key={h} className="facility-card v3-facility-cell reveal">
+              <div className="v3-facility-num">0{i + 1}</div>
               <h4 className="facility-card-h">{h}</h4>
               <p className="facility-card-body">{b}</p>
             </div>
