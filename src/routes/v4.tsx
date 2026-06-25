@@ -301,9 +301,7 @@ function Hero() {
           </span>
         </h1>
         <p className="v3-hero-sub v4-hero-sub">
-          A brand-new ambulatory surgery center in Independence, MO. Doctor-owned.
-          Doctor-funded. Built so Medicaid, Medicare, and special-needs patients finally
-          have somewhere to go.
+          A doctor-owned surgery center built for the patients other facilities keep sending away.
         </p>
         <div className="hero-cta">
           <a href="#refer" className="hero-btn-primary">Refer a Patient <span aria-hidden>→</span></a>
