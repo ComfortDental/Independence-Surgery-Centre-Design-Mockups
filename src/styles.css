@@ -9,6 +9,18 @@ html {
   scroll-behavior: smooth;
   scroll-padding-top: 96px;
 }
+
+/* ─── Default to arrow cursor; pointer only on interactive elements ─── */
+html, body { cursor: default; }
+a, button, [role="button"], label, summary, select,
+input[type="submit"], input[type="button"], input[type="reset"], input[type="checkbox"], input[type="radio"] {
+  cursor: pointer;
+}
+input[type="text"], input[type="email"], input[type="tel"], input[type="url"],
+input[type="search"], input[type="password"], input[type="number"], textarea {
+  cursor: text;
+}
+:disabled { cursor: not-allowed; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
 }
