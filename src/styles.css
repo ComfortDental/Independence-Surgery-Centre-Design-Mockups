@@ -2736,3 +2736,81 @@ input[type="search"], input[type="password"], input[type="number"], textarea {
 @media (max-width: 540px) {
   .hub-foot { flex-direction: column; gap: 8px; }
 }
+
+/* ============================================================ */
+/* Responsive fixes — v3 & v4 (nav, story, hero stats, cards)   */
+/* ============================================================ */
+
+/* Nav: ensure Tailwind .hidden beats utility-class overrides */
+.isc-nav .hidden { display: none !important; }
+
+/* Story grid: stack on tablet/mobile in v3 & v4 (they override base) */
+@media (max-width: 900px) {
+  .v3 .story-grid,
+  .v4 .story-grid {
+    grid-template-columns: 1fr !important;
+    gap: 40px;
+  }
+  .v3 .story-sidebar,
+  .v4 .story-sidebar {
+    position: static !important;
+    order: 0 !important;
+  }
+  .v3-story-zero { font-size: 96px !important; }
+  .v3-story-zero-text { max-width: 100% !important; }
+}
+
+@media (max-width: 600px) {
+  .v3-story-zero { font-size: 72px !important; }
+  .v3 .story-h2, .v4 .story-h2 { font-size: 30px !important; }
+}
+
+/* v4 hero typography scales down */
+@media (max-width: 900px) {
+  .v4 .v4-hero-line { font-size: clamp(34px, 8.5vw, 56px) !important; line-height: 1.05 !important; }
+  .v4 .v4-hero-sub { font-size: 16px !important; }
+}
+
+/* Care/Doctors/Facility/Values/Access grids — stack cleanly */
+@media (max-width: 900px) {
+  .v3 .care-grid, .v4 .care-grid,
+  .v3 .doctors-grid, .v4 .doctors-grid,
+  .v3 .access-grid, .v4 .access-grid,
+  .v3 .values-grid, .v4 .values-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .v3 .refer-grid, .v4 .refer-grid,
+  .v3 .contact-grid, .v4 .contact-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* v3 care band padding shrinks on mobile */
+@media (max-width: 600px) {
+  .v3-care-band { padding: 18px 22px !important; }
+  .v3-care-body-wrap { padding: 24px 22px 28px !important; }
+}
+
+/* Section padding reduces on mobile so content breathes */
+@media (max-width: 720px) {
+  .v3 .care-section,
+  .v3 .doctors-section,
+  .v3 .facility-section,
+  .v3 .access-section,
+  .v3 .values-section,
+  .v3 .refer-section,
+  .v4 .care-section,
+  .v4 .doctors-section,
+  .v4 .facility-section,
+  .v4 .access-section,
+  .v4 .values-section,
+  .v4 .refer-section {
+    padding-top: 72px !important;
+    padding-bottom: 72px !important;
+  }
+}
+
+/* Hero stat fix already exists at 900; ensure padding-right doesn't clip */
+@media (max-width: 900px) {
+  .v3-hero-stat { padding-right: 0 !important; }
+}
