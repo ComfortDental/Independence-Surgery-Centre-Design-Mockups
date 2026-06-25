@@ -440,11 +440,13 @@ html {
   gap: 34px;
 }
 .isc-nav-links {
-  display: flex;
   gap: 28px;
   font-size: 14px;
   font-weight: 500;
   color: #5B5247;
+}
+@media (min-width: 1024px) {
+  .isc-nav-links { display: flex; }
 }
 .isc-nav-links a { color: #5B5247; }
 .isc-nav-links a:hover { color: #2A241D; }
