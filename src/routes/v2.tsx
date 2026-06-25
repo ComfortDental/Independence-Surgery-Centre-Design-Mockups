@@ -207,44 +207,57 @@ function Nav() {
   const [open, setOpen] = useState(false);
   return (
     <header id="top" className="isc-nav">
-      <Wordmark />
-      <div className="isc-nav-right">
-        <nav className="isc-nav-links hidden lg:flex">
-          {navLinks.slice(0, -1).map((l) => (
-            <a key={l.href} href={l.href} className="nav-link">
-              {l.label}
-            </a>
-          ))}
-        </nav>
-        <a href="#refer" className="isc-nav-cta hidden sm:inline-flex">
-          Refer a Patient <span aria-hidden>→</span>
-        </a>
-        <button
-          onClick={() => setOpen((o) => !o)}
-          className="grid h-10 w-10 place-items-center rounded-full border border-[var(--line)] lg:hidden"
-          aria-label="Toggle menu"
-        >
-          <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2">
-            {open ? <path d="M6 6l12 12M18 6l-12 12" /> : <path d="M4 7h16M4 12h16M4 17h16" />}
-          </svg>
-        </button>
-      </div>
-      {open && (
-        <div className="border-t border-[var(--line)] bg-[var(--cream)] lg:hidden">
-          <nav className="mx-auto flex max-w-7xl flex-col gap-1 px-5 py-4">
-            {navLinks.map((l) => (
-              <a
-                key={l.href}
-                href={l.href}
-                onClick={() => setOpen(false)}
-                className="rounded-lg px-3 py-2.5 text-sm text-[var(--ink-soft)] hover:bg-[var(--cream-deep)] hover:text-[var(--ink)]"
-              >
+      <div className="flex w-full items-center justify-between">
+        <Wordmark />
+        <div className="isc-nav-right">
+          <nav className="isc-nav-links hidden lg:flex">
+            {navLinks.slice(0, -1).map((l) => (
+              <a key={l.href} href={l.href} className="nav-link">
                 {l.label}
               </a>
             ))}
           </nav>
+          <a href="#refer" className="isc-nav-cta hidden sm:inline-flex">
+            Refer a Patient <span aria-hidden>→</span>
+          </a>
+          <button
+            type="button"
+            onClick={() => setOpen((o) => !o)}
+            className="isc-burger lg:hidden"
+            aria-label="Toggle menu"
+            aria-expanded={open}
+            data-open={open}
+          >
+            <span className="isc-burger-box" aria-hidden>
+              <span /><span /><span />
+            </span>
+          </button>
         </div>
-      )}
+      </div>
+      <div className="isc-mobile-panel lg:hidden" data-open={open}>
+        <nav className="mx-auto flex max-w-7xl flex-col gap-1 px-5 py-4">
+          {navLinks.slice(0, -1).map((l, i) => (
+            <a
+              key={l.href}
+              href={l.href}
+              onClick={() => setOpen(false)}
+              className="isc-mobile-link"
+              style={{ transitionDelay: open ? `${80 + i * 45}ms` : "0ms" }}
+            >
+              <span>{l.label}</span>
+              <span className="chev" aria-hidden>→</span>
+            </a>
+          ))}
+          <a
+            href="#refer"
+            onClick={() => setOpen(false)}
+            className="isc-mobile-cta"
+            style={{ transitionDelay: open ? `${80 + navLinks.length * 45}ms` : "0ms" }}
+          >
+            Refer a Patient <span aria-hidden>→</span>
+          </a>
+        </nav>
+      </div>
     </header>
   );
 }
