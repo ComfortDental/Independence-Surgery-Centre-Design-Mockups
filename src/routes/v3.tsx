@@ -261,111 +261,40 @@ function Nav() {
 
 function Hero() {
   return (
-    <section className="relative overflow-hidden">
-      <div className="hero-grid-wrap mx-auto" style={{ maxWidth: "1440px" }}>
-        <div
-          className="inline-flex items-center gap-2 bg-white"
-          style={{
-            border: "1px solid #E7DCC9",
-            borderRadius: "100px",
-            padding: "8px 16px",
-            color: "#6F7E5E",
-            fontSize: "11px",
-            fontWeight: 600,
-            letterSpacing: "2px",
-            textTransform: "uppercase",
-          }}
-        >
-          <span
-            className="isc-pulse inline-block"
-            style={{
-              width: "6px",
-              height: "6px",
-              borderRadius: "999px",
-              background: "#6F7E5E",
-            }}
-          />
+    <section className="v3-hero">
+      <img src={buildingFront.url} alt="Independence Surgery Center building" className="v3-hero-img" />
+      <div className="v3-hero-overlay" aria-hidden />
+      <div className="v3-hero-content">
+        <div className="v3-hero-badge">
+          <span className="isc-pulse v3-hero-dot" />
           Opening Q4 2026 · Independence, MO
         </div>
-
-        <div className="hero-grid mt-8">
-          <div className="hero-copy">
-            <h1 className="hero-h1 font-serif text-[var(--ink)]">
-              The surgery center
-              <br />
-              that{" "}
-              <em style={{ fontStyle: "italic", color: "#B0593A" }}>
-                should already
-                <br className="hidden sm:block" /> exist.
-              </em>
-            </h1>
-            <p className="hero-sub">
-              A brand-new ambulatory surgery center. Doctor-owned. Doctor-funded. Built so
-              Medicaid, Medicare, and special-needs patients finally have somewhere to go.
-            </p>
-            <div className="hero-cta">
-              <a
-                href="#refer"
-                className="hero-btn-primary"
-              >
-                Refer a Patient
-                <span aria-hidden>→</span>
-              </a>
-              <a
-                href="#story"
-                className="hero-btn-ghost"
-              >
-                Why we built this
-              </a>
-            </div>
-          </div>
-
-          <div className="hero-image relative">
-            {/* Layer 1 — decorative peach shape, top-right */}
-            <div
-              aria-hidden
-              className="pointer-events-none absolute z-0"
-              style={{
-                top: "-18px",
-                right: "-18px",
-                width: "62%",
-                height: "74%",
-                background: "#F1E2D2",
-                borderRadius: "200px 24px 24px 24px",
-              }}
-            />
-
-            {/* Layer 2 — the photo with asymmetric huge top-left radius */}
-            <img
-              src={buildingFront.url}
-              alt="Rendering of the Independence Surgery Center building"
-              className="relative z-10 block w-full object-cover"
-              style={{
-                borderRadius: "180px 20px 20px 20px",
-                boxShadow: "0 30px 70px rgba(42,36,29,0.18)",
-                aspectRatio: "4 / 3",
-              }}
-            />
-
-            {/* Layer 3 — floating overlay card, bleeds left past the image */}
-            <div
-              className="float-slow absolute z-20 max-w-[15rem] bg-white"
-              style={{
-                bottom: "26px",
-                left: "-26px",
-                padding: "18px 24px",
-                borderRadius: "18px",
-                boxShadow: "0 16px 40px rgba(42,36,29,0.16)",
-              }}
-            >
-              <div className="font-serif text-[1.35rem] leading-[1.1] text-[var(--terracotta)]">
-                Increasing<br />access to care
-              </div>
-              <div className="mt-2 text-[0.82rem] leading-snug text-[var(--ink-soft)]">
-                A focus on Medicaid<br />&amp; Medicare patients.
-              </div>
-            </div>
-          </div>
+        <h1 className="v3-hero-h1">
+          The surgery center<br />
+          that should<br />
+          already exist.
+        </h1>
+        <p className="v3-hero-sub">
+          A brand-new ambulatory surgery center. Doctor-owned. Doctor-funded. Built so
+          Medicaid, Medicare, and special-needs patients finally have somewhere to go.
+        </p>
+        <div className="hero-cta">
+          <a href="#refer" className="hero-btn-primary">Refer a Patient <span aria-hidden>→</span></a>
+          <a href="#story" className="hero-btn-ghost v3-hero-ghost">Why we built this</a>
+        </div>
+      </div>
+      <div className="v3-hero-stats">
+        <div className="v3-hero-stat">
+          <div className="v3-hero-stat-label">Medicaid</div>
+          <div className="v3-hero-stat-sub">Accepted from day one</div>
+        </div>
+        <div className="v3-hero-stat">
+          <div className="v3-hero-stat-label">Multiple ORs</div>
+          <div className="v3-hero-stat-sub">Hospital-grade infrastructure</div>
+        </div>
+        <div className="v3-hero-stat">
+          <div className="v3-hero-stat-label">Owner-operated</div>
+          <div className="v3-hero-stat-sub">The doctors funded the building</div>
         </div>
       </div>
     </section>
