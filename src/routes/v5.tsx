@@ -7,7 +7,7 @@ import iscLogo from "@/assets/isc-logo.png.asset.json";
 import iscLogoWhite from "@/assets/isc-logo-white.png.asset.json";
 import { useEffect, useState } from "react";
 
-export const Route = createFileRoute("/v3")({
+export const Route = createFileRoute("/v5")({
   head: () => ({
     meta: [
       { title: "Independence Surgery Center — Opening Q4 2026" },
