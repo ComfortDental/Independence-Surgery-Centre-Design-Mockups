@@ -178,7 +178,6 @@ function Index() {
       <Story />
       <Care />
       <Doctors />
-      <HowToRefer />
       <Facility />
       <Access />
       <Values />
@@ -268,9 +267,9 @@ function Hero() {
           Opening Q4 2026 · Independence, MO
         </div>
         <h1 className="v3-hero-h1">
-          The surgery center<br />
-          that should<br />
-          already exist.
+          Real operating rooms.<br />
+          Real specialists.<br />
+          <em style={{ fontStyle: "italic", color: "#9FC6B5" }}>Real access.</em>
         </h1>
         <p className="v3-hero-sub">
           A brand-new ambulatory surgery center. Doctor-owned. Doctor-funded. Built so
@@ -284,15 +283,15 @@ function Hero() {
       <div className="v3-hero-stats">
         <div className="v3-hero-stat">
           <div className="v3-hero-stat-label">Medicaid</div>
-          <div className="v3-hero-stat-sub">Accepted from day one</div>
+          <div className="v3-hero-stat-sub">Accepted — no asterisks</div>
         </div>
         <div className="v3-hero-stat">
           <div className="v3-hero-stat-label">Multiple ORs</div>
-          <div className="v3-hero-stat-sub">Hospital-grade infrastructure</div>
+          <div className="v3-hero-stat-sub">Hospital-grade monitoring</div>
         </div>
         <div className="v3-hero-stat">
           <div className="v3-hero-stat-label">Owner-operated</div>
-          <div className="v3-hero-stat-sub">The doctors funded the building</div>
+          <div className="v3-hero-stat-sub">Board-certified specialists</div>
         </div>
       </div>
     </section>
@@ -314,12 +313,10 @@ function Story() {
           <div className="story-text">
             <p className="story-lead">
               Two years ago, a speaker at a conference put up a single number.{" "}
-              <span style={{ color: "#B0593A", fontWeight: 600 }}>Zero.</span> Not one private oral
-              surgeon in the area accepted Medicaid. Then the talk turned to children.
-            </p>
-            <p>
-              Kids with infections spreading through their jaws. Kids who needed surgery under
-              general anesthesia and couldn't get into a hospital OR for up to a year.
+              <span style={{ color: "#B0593A", fontWeight: 600 }}>Zero.</span> Then the talk turned
+              to children. Kids with special needs. Kids with infections spreading through their
+              jaws. Kids who needed surgery under general anesthesia and couldn't get into a
+              hospital OR for up to a year.
             </p>
             <p>
               A four-year-old who won't eat because it hurts too much and can't tell you why. A
@@ -559,10 +556,10 @@ function Facility() {
 
         <div className="facility-grid v3-facility-strip">
           {[
-            ["Purpose-Built Design", "Engineered from the ground up for surgical efficiency — not converted from something else."],
-            ["Multiple Operating Rooms", "Simultaneous cases running in parallel. Shorter wait times. Higher throughput."],
-            ["Hospital-Grade Monitoring", "Full anesthesia capability. Same monitoring, same safety standards, same equipment as a hospital OR."],
-            ["Kansas City Metro", "Centrally located in Independence. Easy access from anywhere in the KC metro."],
+            ["Purpose-Built Design", "Engineered from the ground up for surgical efficiency — not converted."],
+            ["Multiple Operating Rooms", "Simultaneous cases in parallel. Shorter waits. Higher throughput."],
+            ["Hospital-Grade Monitoring", "Full anesthesia capability. Same standards, same equipment as a hospital OR."],
+            ["Kansas City Metro", "Centrally located in Independence. Easy access across the KC metro."],
           ].map(([h, b], i) => (
             <div key={h} className="facility-card v3-facility-cell reveal">
               <div className="v3-facility-num">0{i + 1}</div>
@@ -811,7 +808,7 @@ function Footer() {
             <a href="tel:8162710110">816-271-0110</a> · <a href="mailto:[email protected]">[email protected]</a>
           </div>
           <div className="isc-footer-copy">
-            © 2026 Independence Surgery Center · Doctor-owned · Opening Q4 2026
+            © 2026 Independence Surgery Center. All rights reserved.
           </div>
         </div>
       </div>
