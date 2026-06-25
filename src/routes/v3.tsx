@@ -400,24 +400,34 @@ function Care() {
         </div>
 
         <div className="care-grid">
-          <article className="care-card reveal">
-            <img src={logoOral.url} alt="Independence Oral Surgery" className="care-logo" />
+          <article className="care-card v3-care-card reveal">
+            <div className="v3-care-band v3-care-band-oral">
+              <span className="v3-care-band-dot" />
+              <span className="v3-care-band-label">Oral &amp; Maxillofacial Surgery</span>
+            </div>
+            <div className="v3-care-body-wrap">
             <p className="care-body">
               Full-scope oral and maxillofacial surgery led by a dual-degree MD/DMD board
               certified by ABOMS. When you refer here, your patient is treated by the owner of
               the facility. Not a resident. Not a rotation.{" "}
               <span style={{ color: "#2A241D" }}>The same surgeon, every time.</span>
             </p>
+            </div>
           </article>
 
-          <article className="care-card reveal">
-            <img src={logoPedi.url} alt="Independence Pediatric Dentistry" className="care-logo" />
+          <article className="care-card v3-care-card reveal">
+            <div className="v3-care-band v3-care-band-peds">
+              <span className="v3-care-band-dot" />
+              <span className="v3-care-band-label">Pediatric Dentistry</span>
+            </div>
+            <div className="v3-care-body-wrap">
             <p className="care-body">
               Some kids can't sit in a dental chair. Special needs, developmental disabilities,
               severe anxiety, complex treatment plans. They need an operating room, a pediatric
               dentist who has done this hundreds of times, and a facility designed around them.{" "}
               <span style={{ color: "#2A241D" }}>That is what this is.</span>
             </p>
+            </div>
           </article>
         </div>
 
