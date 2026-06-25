@@ -988,18 +988,28 @@ function Spine() {
     const spine = document.querySelector<HTMLElement>(".v2-spine");
     if (!fill || !spine) return;
     let raf = 0;
+    let measureTimer = 0;
     let startY = 0;
     let endY = 0;
     const measure = () => {
       const nav = document.getElementById("top");
       const footer = document.querySelector<HTMLElement>(".isc-footer");
-      startY = nav ? nav.getBoundingClientRect().bottom + window.scrollY : 0;
-      endY = footer
+      const nextStart = nav ? nav.getBoundingClientRect().bottom + window.scrollY : 0;
+      const nextEnd = footer
         ? footer.getBoundingClientRect().top + window.scrollY
         : document.body.scrollHeight;
-      spine.style.top = `${startY}px`;
-      spine.style.height = `${Math.max(endY - startY, 0)}px`;
+      // Avoid pointless writes that retrigger layout/ResizeObserver loops.
+      if (nextStart !== startY || nextEnd !== endY) {
+        startY = nextStart;
+        endY = nextEnd;
+        spine.style.top = `${startY}px`;
+        spine.style.height = `${Math.max(endY - startY, 0)}px`;
+      }
       update();
+    };
+    const scheduleMeasure = () => {
+      window.clearTimeout(measureTimer);
+      measureTimer = window.setTimeout(measure, 120);
     };
     const update = () => {
       const viewport = window.scrollY + window.innerHeight * 0.5;
@@ -1012,22 +1022,28 @@ function Spine() {
       raf = requestAnimationFrame(update);
     };
     window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", measure);
-    window.addEventListener("load", measure);
+    window.addEventListener("resize", scheduleMeasure);
+    window.addEventListener("load", scheduleMeasure);
     // Re-measure when layout changes (images loading, fonts, reveals, etc.)
-    const ro = new ResizeObserver(measure);
-    ro.observe(document.body);
+    // Observe only the footer + nav so reveal-animation transforms in the
+    // body don't fire the observer on every frame and cause spine jitter.
+    const ro = new ResizeObserver(scheduleMeasure);
+    const nav = document.getElementById("top");
+    const footer = document.querySelector<HTMLElement>(".isc-footer");
+    if (nav) ro.observe(nav);
+    if (footer) ro.observe(footer);
     measure();
     // Settle measurement after cold-open / late images
     const t1 = window.setTimeout(measure, 800);
     const t2 = window.setTimeout(measure, 2400);
     return () => {
       window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", measure);
-      window.removeEventListener("load", measure);
+      window.removeEventListener("resize", scheduleMeasure);
+      window.removeEventListener("load", scheduleMeasure);
       ro.disconnect();
       window.clearTimeout(t1);
       window.clearTimeout(t2);
+      window.clearTimeout(measureTimer);
       cancelAnimationFrame(raf);
     };
   }, []);
