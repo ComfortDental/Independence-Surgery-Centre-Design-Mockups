@@ -727,8 +727,12 @@ function Refer() {
 
         <form
           onSubmit={(e) => e.preventDefault()}
-          className="form-card reveal"
+          className="form-card reveal v5-form-card"
         >
+          <div className="v5-form-urgency reveal">
+            <span className="v5-form-urgency-dot" aria-hidden />
+            Opening Q4 2026. We're building our referral network now.
+          </div>
           <div className="form-tabs">
             {(["provider", "patient"] as const).map((r) => (
               <button
