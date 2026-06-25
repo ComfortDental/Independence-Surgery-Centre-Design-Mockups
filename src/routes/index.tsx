@@ -60,6 +60,7 @@ function Hub() {
 
       <section className="hub-intro">
         <p className="hub-eyebrow"><span className="hub-dot" /> Independence Surgery Center</p>
+        <h1 className="hub-title">2 designs. 4 prototypes to choose from.</h1>
       </section>
 
       <section className="hub-grid">
