@@ -1558,6 +1558,10 @@ input[type="search"], input[type="password"], input[type="number"], textarea {
   color: #1F4A3D !important;
 }
 
+.v3 em.v3-sage-emphasis {
+  color: #8FBFAE !important;
+}
+
 /* Nav — green CTA, square radii */
 .v3 .isc-nav {
   background: rgba(251,250,246,0.9);
