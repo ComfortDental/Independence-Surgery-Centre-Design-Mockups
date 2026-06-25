@@ -1550,9 +1550,9 @@ input[type="search"], input[type="password"], input[type="number"], textarea {
 .v3 em {
   font-family: 'Newsreader', serif !important;
   font-style: italic !important;
-  font-weight: 400 !important;
+  font-weight: 600 !important;
   letter-spacing: -0.2px !important;
-  color: var(--v3-green) !important;
+  color: #1F4A3D !important;
 }
 
 /* Nav — green CTA, square radii */
@@ -1962,9 +1962,10 @@ input[type="search"], input[type="password"], input[type="number"], textarea {
 }
 .v4 .v4-hero-line-3 em {
   font-style: italic;
-  color: #D98A66;
+  color: #FFD2A8 !important;
   font-family: "Newsreader", "Spectral", serif;
-  font-weight: 500;
+  font-weight: 600;
+  text-shadow: 0 1px 12px rgba(0,0,0,0.35);
 }
 @keyframes v4LineIn {
   0%   { opacity: 0.35; clip-path: inset(0 100% 0 0); transform: translateY(6px); }
