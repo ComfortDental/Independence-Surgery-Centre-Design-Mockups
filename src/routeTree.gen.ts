@@ -9,14 +9,14 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as V5RouteImport } from './routes/v5'
+import { Route as V4RouteImport } from './routes/v4'
 import { Route as V3RouteImport } from './routes/v3'
 import { Route as V2RouteImport } from './routes/v2'
 import { Route as IndexRouteImport } from './routes/index'
 
-const V5Route = V5RouteImport.update({
-  id: '/v5',
-  path: '/v5',
+const V4Route = V4RouteImport.update({
+  id: '/v4',
+  path: '/v4',
   getParentRoute: () => rootRouteImport,
 } as any)
 const V3Route = V3RouteImport.update({
@@ -39,43 +39,43 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/v2': typeof V2Route
   '/v3': typeof V3Route
-  '/v5': typeof V5Route
+  '/v4': typeof V4Route
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/v2': typeof V2Route
   '/v3': typeof V3Route
-  '/v5': typeof V5Route
+  '/v4': typeof V4Route
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/v2': typeof V2Route
   '/v3': typeof V3Route
-  '/v5': typeof V5Route
+  '/v4': typeof V4Route
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/v2' | '/v3' | '/v5'
+  fullPaths: '/' | '/v2' | '/v3' | '/v4'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/v2' | '/v3' | '/v5'
-  id: '__root__' | '/' | '/v2' | '/v3' | '/v5'
+  to: '/' | '/v2' | '/v3' | '/v4'
+  id: '__root__' | '/' | '/v2' | '/v3' | '/v4'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   V2Route: typeof V2Route
   V3Route: typeof V3Route
-  V5Route: typeof V5Route
+  V4Route: typeof V4Route
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/v5': {
-      id: '/v5'
-      path: '/v5'
-      fullPath: '/v5'
-      preLoaderRoute: typeof V5RouteImport
+    '/v4': {
+      id: '/v4'
+      path: '/v4'
+      fullPath: '/v4'
+      preLoaderRoute: typeof V4RouteImport
       parentRoute: typeof rootRouteImport
     }
     '/v3': {
@@ -106,7 +106,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   V2Route: V2Route,
   V3Route: V3Route,
-  V5Route: V5Route,
+  V4Route: V4Route,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
