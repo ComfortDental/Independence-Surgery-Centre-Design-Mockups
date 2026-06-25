@@ -1934,50 +1934,50 @@ input[type="search"], input[type="password"], input[type="number"], textarea {
 .v3 .hero-cta { margin-top: 0; }
 
 /* ============================================================
-   v5 — refinements on top of v3 (.v3 class is also on root)
+   v4 — refinements on top of v3 (.v3 class is also on root)
    ============================================================ */
 
 /* Hero: smoother parallax base + cinematic crop */
-.v5 .v3-hero { overflow: hidden; }
-.v5 .v3-hero-img {
+.v4 .v3-hero { overflow: hidden; }
+.v4 .v3-hero-img {
   will-change: transform;
   transition: none;
   transform: translate3d(0, 0, 0) scale(1.06);
 }
 
 /* Hero H1 — line-by-line clip-path reveal */
-.v5 .v5-hero-h1 { display: block; }
-.v5 .v5-hero-line {
+.v4 .v4-hero-h1 { display: block; }
+.v4 .v4-hero-line {
   display: block;
   opacity: 0;
   clip-path: inset(0 100% 0 0);
   will-change: clip-path, opacity, transform;
-  animation: v5LineIn 0.78s cubic-bezier(0.77, 0, 0.175, 1) both;
+  animation: v4LineIn 0.78s cubic-bezier(0.77, 0, 0.175, 1) both;
 }
-.v5 .v5-hero-line-1 { animation-delay: 0.12s; }
-.v5 .v5-hero-line-2 { animation-delay: 0.26s; }
-.v5 .v5-hero-line-3 {
+.v4 .v4-hero-line-1 { animation-delay: 0.12s; }
+.v4 .v4-hero-line-2 { animation-delay: 0.26s; }
+.v4 .v4-hero-line-3 {
   animation-delay: 0.40s;
   font-weight: 800;
 }
-.v5 .v5-hero-line-3 em {
+.v4 .v4-hero-line-3 em {
   font-style: italic;
   color: #D98A66;
   font-family: "Newsreader", "Spectral", serif;
   font-weight: 500;
 }
-@keyframes v5LineIn {
+@keyframes v4LineIn {
   0%   { opacity: 0.35; clip-path: inset(0 100% 0 0); transform: translateY(6px); }
   100% { opacity: 1;    clip-path: inset(0 0% 0 0);   transform: translateY(0);   }
 }
-.v5 .v5-hero-sub {
+.v4 .v4-hero-sub {
   opacity: 0;
-  animation: v5SubIn 0.7s ease-out 0.62s both;
+  animation: v4SubIn 0.7s ease-out 0.62s both;
 }
-@keyframes v5SubIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes v4SubIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
 /* Hero stat proof line */
-.v5 .v5-hero-stat-proof {
+.v4 .v4-hero-stat-proof {
   margin-top: 6px;
   font-size: 12px;
   letter-spacing: 0.02em;
@@ -1987,42 +1987,42 @@ input[type="search"], input[type="password"], input[type="number"], textarea {
 }
 
 /* Universal card lift — applied to all card-like elements in v5 */
-.v5 .care-card,
-.v5 .doctor-card,
-.v5 .facility-card,
-.v5 .values-card,
-.v5 .access-card,
-.v5 .story-card,
-.v5 .how-refer-step,
-.v5 .form-card,
-.v5 .contact-link {
+.v4 .care-card,
+.v4 .doctor-card,
+.v4 .facility-card,
+.v4 .values-card,
+.v4 .access-card,
+.v4 .story-card,
+.v4 .how-refer-step,
+.v4 .form-card,
+.v4 .contact-link {
   transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
               box-shadow 0.28s ease,
               border-color 0.22s ease,
               background-color 0.22s ease;
   will-change: transform;
 }
-.v5 .care-card:hover,
-.v5 .doctor-card:hover,
-.v5 .facility-card:hover,
-.v5 .values-card:hover,
-.v5 .story-card:hover,
-.v5 .how-refer-step:hover,
-.v5 .contact-link:hover {
+.v4 .care-card:hover,
+.v4 .doctor-card:hover,
+.v4 .facility-card:hover,
+.v4 .values-card:hover,
+.v4 .story-card:hover,
+.v4 .how-refer-step:hover,
+.v4 .contact-link:hover {
   transform: translateY(-5px);
   box-shadow: 0 22px 46px rgba(30, 40, 35, 0.10);
   border-color: #B5C9C0;
 }
-.v5 .access-card:hover {
+.v4 .access-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 22px 46px rgba(0, 0, 0, 0.35);
 }
 
 /* Form focus ring — quality signal */
-.v5 .form-input:focus,
-.v5 .form-textarea:focus,
-.v5 input:focus,
-.v5 textarea:focus {
+.v4 .form-input:focus,
+.v4 .form-textarea:focus,
+.v4 input:focus,
+.v4 textarea:focus {
   border-color: #2E5C4E !important;
   box-shadow: 0 0 0 3px rgba(46, 92, 78, 0.14) !important;
   background: #fff !important;
@@ -2030,7 +2030,7 @@ input[type="search"], input[type="password"], input[type="number"], textarea {
 }
 
 /* Urgency micro-banner above the form */
-.v5 .v5-form-urgency {
+.v4 .v4-form-urgency {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -2044,33 +2044,33 @@ input[type="search"], input[type="password"], input[type="number"], textarea {
   font-weight: 600;
   letter-spacing: 0.01em;
 }
-.v5 .v5-form-urgency-dot {
+.v4 .v4-form-urgency-dot {
   width: 8px; height: 8px; border-radius: 999px;
   background: #2E5C4E;
   box-shadow: 0 0 0 0 rgba(46, 92, 78, 0.6);
-  animation: v5Pulse 2.1s ease-out infinite;
+  animation: v4Pulse 2.1s ease-out infinite;
   flex: 0 0 auto;
 }
-@keyframes v5Pulse {
+@keyframes v4Pulse {
   0%   { box-shadow: 0 0 0 0 rgba(46, 92, 78, 0.55); }
   70%  { box-shadow: 0 0 0 10px rgba(46, 92, 78, 0); }
   100% { box-shadow: 0 0 0 0 rgba(46, 92, 78, 0); }
 }
 
 /* Floating refer button — v5 tone */
-.v5 .v5-floating {
+.v4 .v4-floating {
   background: #2E5C4E;
   color: #fff;
   border: none;
   box-shadow: 0 14px 34px rgba(46, 92, 78, 0.42);
 }
-.v5 .v5-floating:hover {
+.v4 .v4-floating:hover {
   background: #234639;
   box-shadow: 0 18px 40px rgba(46, 92, 78, 0.55);
 }
 
 /* Diagonal cut on the Access (dark) section */
-.v5 .access-section {
+.v4 .access-section {
   clip-path: polygon(0 36px, 100% 0, 100% 100%, 0 100%);
   margin-top: -36px;
   padding-top: calc(116px + 36px);
@@ -2079,19 +2079,19 @@ input[type="search"], input[type="password"], input[type="number"], textarea {
 }
 
 /* Submit button polish */
-.v5 .form-submit {
+.v4 .form-submit {
   transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1),
               box-shadow 0.22s ease, background 0.2s ease;
 }
-.v5 .form-submit:hover {
+.v4 .form-submit:hover {
   transform: translateY(-2px);
   box-shadow: 0 16px 32px rgba(46, 92, 78, 0.32);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .v5 .v5-hero-line,
-  .v5 .v5-hero-sub,
-  .v5 .v3-hero-img {
+  .v4 .v4-hero-line,
+  .v4 .v4-hero-sub,
+  .v4 .v3-hero-img {
     animation: none !important;
     opacity: 1 !important;
     clip-path: none !important;

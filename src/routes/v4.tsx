@@ -7,7 +7,7 @@ import iscLogo from "@/assets/isc-logo.png.asset.json";
 import iscLogoWhite from "@/assets/isc-logo-white.png.asset.json";
 import { useEffect, useState } from "react";
 
-export const Route = createFileRoute("/v5")({
+export const Route = createFileRoute("/v4")({
   head: () => ({
     meta: [
       { title: "Independence Surgery Center — Opening Q4 2026" },
@@ -161,7 +161,7 @@ function FloatingRefer() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
   return (
-    <a href="#refer" className={`floating-refer v3-floating v5-floating magnetic ${visible ? "visible" : ""}`}>
+    <a href="#refer" className={`floating-refer v3-floating v4-floating magnetic ${visible ? "visible" : ""}`}>
       Refer a Patient <span aria-hidden>→</span>
     </a>
   );
@@ -169,7 +169,7 @@ function FloatingRefer() {
 
 function useHeroParallax() {
   useEffect(() => {
-    const img = document.querySelector<HTMLElement>(".v5 .v3-hero-img");
+    const img = document.querySelector<HTMLElement>(".v4 .v3-hero-img");
     if (!img) return;
     let raf = 0;
     const tick = () => {
@@ -198,7 +198,7 @@ function Index() {
   useMagnetic();
   useHeroParallax();
   return (
-    <div className="v3 v5 min-h-screen bg-background text-foreground">
+    <div className="v3 v4 min-h-screen bg-background text-foreground">
       <Nav />
       <Hero />
       <Story />
@@ -293,14 +293,14 @@ function Hero() {
           <span className="isc-pulse v3-hero-dot" />
           Opening Q4 2026 · Independence, MO
         </div>
-        <h1 className="v3-hero-h1 v5-hero-h1">
-          <span className="v5-hero-line v5-hero-line-1">Your Medicaid patients</span>
-          <span className="v5-hero-line v5-hero-line-2">deserve a surgeon</span>
-          <span className="v5-hero-line v5-hero-line-3">
+        <h1 className="v3-hero-h1 v4-hero-h1">
+          <span className="v4-hero-line v4-hero-line-1">Your Medicaid patients</span>
+          <span className="v4-hero-line v4-hero-line-2">deserve a surgeon</span>
+          <span className="v4-hero-line v4-hero-line-3">
             who will <em>actually see them.</em>
           </span>
         </h1>
-        <p className="v3-hero-sub v5-hero-sub">
+        <p className="v3-hero-sub v4-hero-sub">
           A brand-new ambulatory surgery center in Independence, MO. Doctor-owned.
           Doctor-funded. Built so Medicaid, Medicare, and special-needs patients finally
           have somewhere to go.
@@ -314,17 +314,17 @@ function Hero() {
         <div className="v3-hero-stat">
           <div className="v3-hero-stat-label">Medicaid</div>
           <div className="v3-hero-stat-sub">Accepted from day one</div>
-          <div className="v5-hero-stat-proof">What started all of this.</div>
+          <div className="v4-hero-stat-proof">What started all of this.</div>
         </div>
         <div className="v3-hero-stat">
           <div className="v3-hero-stat-label">Multiple ORs</div>
           <div className="v3-hero-stat-sub">Hospital-grade infrastructure</div>
-          <div className="v5-hero-stat-proof">Running simultaneously.</div>
+          <div className="v4-hero-stat-proof">Running simultaneously.</div>
         </div>
         <div className="v3-hero-stat">
           <div className="v3-hero-stat-label">Owner-operated</div>
           <div className="v3-hero-stat-sub">The doctors funded the building</div>
-          <div className="v5-hero-stat-proof">No PE. No hospital system.</div>
+          <div className="v4-hero-stat-proof">No PE. No hospital system.</div>
         </div>
       </div>
     </section>
@@ -727,10 +727,10 @@ function Refer() {
 
         <form
           onSubmit={(e) => e.preventDefault()}
-          className="form-card reveal v5-form-card"
+          className="form-card reveal v4-form-card"
         >
-          <div className="v5-form-urgency reveal">
-            <span className="v5-form-urgency-dot" aria-hidden />
+          <div className="v4-form-urgency reveal">
+            <span className="v4-form-urgency-dot" aria-hidden />
             Opening Q4 2026. We're building our referral network now.
           </div>
           <div className="form-tabs">
