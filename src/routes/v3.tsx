@@ -346,30 +346,30 @@ function Story() {
           </div>
 
           <aside className="story-sidebar">
-            <div className="story-stat">
+            <div className="v3-story-zero-block">
               <div
-                className="story-stat-num count-up"
+                className="v3-story-zero count-up"
                 data-count-from="40"
                 data-count-to="0"
                 data-count-dur="1800"
               >
                 40
               </div>
-              <div className="story-stat-text">
+              <div className="v3-story-zero-text">
                 private oral surgeons in the area accepting Medicaid.
               </div>
             </div>
 
-            <div className="story-card">
-              <div className="story-card-label" style={{ color: "#6F7E5E" }}>Mission</div>
+            <div className="story-card v3-story-card v3-story-card-mission">
+              <div className="story-card-label v3-story-card-label-mission">Mission</div>
               <p className="story-card-body">
                 Deliver surgical care with precision, safety, and respect. Treat every patient like
                 they matter, because they do.
               </p>
             </div>
 
-            <div className="story-card">
-              <div className="story-card-label" style={{ color: "#B0593A" }}>Vision</div>
+            <div className="story-card v3-story-card v3-story-card-vision">
+              <div className="story-card-label v3-story-card-label-vision">Vision</div>
               <p className="story-card-body">
                 Build the facility that should already exist. Real operating rooms. Real
                 specialists. Real access for Medicaid patients, Medicare patients, and patients
