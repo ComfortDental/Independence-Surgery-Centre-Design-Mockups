@@ -638,7 +638,6 @@ function Values() {
     ["Teamwork", "Small team. Flat structure. Everyone knows the mission because the people who set it are standing right next to them."],
     ["Access & Service", "Medicaid. Medicare. Special needs. We did not just say we would serve these patients. We built an entire surgery center to prove it."],
   ];
-  const pillColors = ["#B0593A", "#6F7E5E", "#8A5A39", "#B0593A", "#6F7E5E", "#8A5A39"];
   return (
     <section className="values-section">
       <div className="values-inner">
@@ -652,8 +651,8 @@ function Values() {
 
         <div className="values-grid">
           {items.map(([h, b], i) => (
-            <div key={h} className="values-card reveal">
-              <span className="values-pill" style={{ background: pillColors[i] }} />
+            <div key={h} className="values-card v3-values-card reveal">
+              <div className="v3-values-num">0{i + 1}</div>
               <h4 className="values-card-h">{h}</h4>
               <p className="values-card-body">{b}</p>
             </div>
